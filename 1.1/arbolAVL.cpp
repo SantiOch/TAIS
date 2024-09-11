@@ -29,38 +29,30 @@ using namespace std;
 //@ <answer>
 template<typename T>
 tuple<bool,bool,int,T,T> esAVL(BinTree<T>tree){
-   if(tree.empty())return {true,true,0,NULL,NULL};
+   if(tree.empty())return {true,true,0,T(),T()};
    else{
       auto[bal_left, avl_left ,height_left,max_left,min_left] = esAVL(tree.left());
       auto[bal_right, avl_right, height_right,max_right,min_right] = esAVL(tree.right());
       bool balanced = bal_left && bal_right && abs(height_left - height_right) <= 1;
       int height = 1+ max(height_left, height_right);
       T val=tree.root();
-      T min_val;
-      T max_val;
-      if(!tree.left().empty()){
-         max_val=max(max_left,val);
-         min_val=min(min_left,val);
-         }else {
-            min_val=val;
-            max_val=val;
+      T min_val_right;
+      T max_val_left;
+      if(tree.left().empty()){
+            max_val_left=val;
          }
-      if(!tree.right().empty()){
-         max_val=max(max_right,val);
-         min_val=min(min_right,val);
-      }     else {
-            min_val=val;
-            max_val=val;
+      if(tree.right().empty()){
+            min_val_right=val;
          }
       bool avl_root=true;
-      if(!tree.left().empty()&&max_val>val){
+      if(!tree.left().empty()&&max_val_left>val){
          avl_root=false;
       }
-      if(!tree.right().empty()&&min_val<val){
+      if(!tree.right().empty()&&min_val_right<val){
          avl_root=false;
       }
       if(!avl_left||!avl_right)avl_root=false;
-      return {balanced, avl_root,height,max_val,min_val};
+      return {balanced, avl_root,height,max_val_left,min_val_right};
    }
 }
 
