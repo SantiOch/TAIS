@@ -2,12 +2,14 @@
 /*@ <authors>
  *
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
- * Alex Guillermo Bonilla Taco
+ * Alex Guillermo Bonilla Taco TAIS009
  *@ </authors> */
 
 #include <iostream>
 #include <fstream>
-
+#include <memory>
+#include <utility>  // Para la clase pair
+#include <tuple>    // Para la clase tuple
 using namespace std;
 
 #include "bintree.h"  // propios o los de las estructuras de datos de clase
@@ -25,50 +27,67 @@ using namespace std;
 // Escribe el código completo de tu solución aquí debajo
 // ================================================================
 //@ <answer>
-
-tuple<bool,bool,int> esAVL(BinTree<int>tree){
-   if(tree.empty())return {true,true,0};
+template<typename T>
+tuple<bool,bool,int,T,T> esAVL(BinTree<T>tree){
+   if(tree.empty())return {true,true,0,NULL,NULL};
    else{
-      auto[bal_left, avl_left ,height_left] = esAVL(tree.left());
-      auto[bal_right, avl_right, height_right] = esAVL(tree.right());
+      auto[bal_left, avl_left ,height_left,max_left,min_left] = esAVL(tree.left());
+      auto[bal_right, avl_right, height_right,max_right,min_right] = esAVL(tree.right());
       bool balanced = bal_left && bal_right && abs(height_left - height_right) <= 1;
       int height = 1+ max(height_left, height_right);
-      int val=tree.root();
-      bool avl_root=tree.left().root()<val && tree.right().root()>val;
-      return {balanced, avl_root,height};
+      T val=tree.root();
+      T min_val;
+      T max_val;
+      if(!tree.left().empty()){
+         max_val=max(max_left,val);
+         min_val=min(min_left,val);
+         }else {
+            min_val=val;
+            max_val=val;
+         }
+      if(!tree.right().empty()){
+         max_val=max(max_right,val);
+         min_val=min(min_right,val);
+      }     else {
+            min_val=val;
+            max_val=val;
+         }
+      bool avl_root=true;
+      if(!tree.left().empty()&&max_val>val){
+         avl_root=false;
+      }
+      if(!tree.right().empty()&&min_val<val){
+         avl_root=false;
+      }
+      if(!avl_left||!avl_right)avl_root=false;
+      return {balanced, avl_root,height,max_val,min_val};
    }
 }
-tuple<bool,bool,int> esAVL(BinTree<string>tree){
-      auto[bal_left, avl_left ,height_left] = esAVL(tree.left());
-      auto[bal_right, avl_right, height_right] = esAVL(tree.right());
-      bool balanced = bal_left && bal_right && abs(height_left - height_right) <= 1;
-      int height = 1+ max(height_left, height_right);
-      int val=tree.root();
-      bool avl_root=tree.left().root()<val && tree.right().root()>val;
-      return {balanced, avl_root,height};
-}
+
 bool resuelveCaso() {
 
    // leer los datos de la entrada
 
+   char c;
+   cin >> c;
    if (!std::cin)  // fin de la entrada
       return false;
-   int c;
-   cin >> c;
    tuple<bool,bool,int> loes;
    if(c == 'N'){
       BinTree<int>tree= read_tree<int>(cin);
-      loes=esAVL(tree);
+      auto[bal, avl, height,max_val,min_val]=esAVL(tree);
+   if(avl&&bal)cout<<"SI"<<endl;
+   else cout<<"NO"<<endl;
 
    }
    else if(c=='P'){
       BinTree<string>tree= read_tree<string>(cin);
-      loes=esAVL(tree);
+      auto[bal, avl, height,max_val,min_val]=esAVL(tree);
+   if(avl&&bal)cout<<"SI"<<endl;
+   else cout<<"NO"<<endl;
    }
    // resolver el caso posiblemente llamando a otras funciones
    
-   if()cout<<"SI"<<endl;
-   else cout<<"NO"<<endl;
    // escribir la solución
 
    return true;
