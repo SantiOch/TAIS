@@ -36,24 +36,28 @@ tuple<bool,bool,int,T,T> esAVL(BinTree<T>tree){
       bool balanced = bal_left && bal_right && abs(height_left - height_right) <= 1;
       int height = 1+ max(height_left, height_right);
       T val=tree.root();
-      T min_val_right;
-      T max_val_left;
-      if(tree.left().empty()){
-            max_val_left=val;
-         }
-      if(tree.right().empty()){
-            min_val_right=val;
-         }
+      T min_val;
+      T max_val;
       bool avl_root=true;
-      if(!tree.left().empty()&&max_val_left>val){
+      if (height==1)      {
+         max_val=val;
+         min_val=val;
+         return {balanced, avl_root,height,max_val,min_val};
+      }
+
+      if (tree.left().empty())
+         min_val = val;
+
+      if(!tree.left().empty()&&max_val>val){
          avl_root=false;
       }
-      if(!tree.right().empty()&&min_val_right<val){
+      if(!tree.right().empty()&&min_val<val){
          avl_root=false;
       }
       if(!avl_left||!avl_right)avl_root=false;
-      return {balanced, avl_root,height,max_val_left,min_val_right};
-   }
+
+      return {balanced, avl_root,height,max_val,min_val};
+      }
 }
 
 bool resuelveCaso() {
