@@ -1,3 +1,16 @@
+//
+//  bintree.h
+//  TAIS1
+//
+//  Created by Santi Ochoa on 9/11/24.
+//
+
+#ifndef bintree_h
+#define bintree_h
+
+
+#endif /* bintree_h */
+
 /*
  * ---------------------------------------------------
  *                ESTRUCTURAS DE DATOS
