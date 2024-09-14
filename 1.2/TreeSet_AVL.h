@@ -36,7 +36,7 @@ protected:
       Link iz, dr; 
       int altura;
       TreeNode(T const& e, Link i = nullptr, Link d = nullptr,
-               int alt = 1) : elem(e), iz(i), dr(d), altura(alt) {}
+               int alt = 1, int tam_ini=1) : elem(e), iz(i), dr(d), altura(alt) , tam_i(tam_ini){}
    };
 
    // puntero a la raíz de la estructura jerárquica de nodos
@@ -76,7 +76,7 @@ public:
    }
 
    T  const &  kesimo ( int  k)  const{
-    return kesimo(root_node,k,0);
+    return kesimo(raiz,k,0);
    }
 
    bool empty() const {
@@ -139,7 +139,10 @@ protected:
          crece = true;
       } else if (menor(e, a->elem)) {
          crece = inserta(e, a->iz);
-         if (crece) reequilibraDer(a);
+         if (crece) {
+            a->tam_i++;
+            reequilibraDer(a);
+         }
       } else if (menor(a->elem, e)) {
          crece = inserta(e, a->dr);
          if (crece) reequilibraIzq(a);
@@ -147,14 +150,14 @@ protected:
          crece = false;
       return crece;
    }
-  T  const &  kesimo ( const Node *root,int  k,int ac)  const{
-    if(num_elems<k)
-      return k;
-    if(root->tam_i==k||ac==k) return root->elem;
-    else if(k<root->tam_i) kesimo(root->left,k,0);
-    else if(k>root->tam_i) kesimo(root->right,k,ac+root->tam_i);
-
-  }
+   T const &kesimo(const Link &raiz, int k, const int &ac) const{
+      if (ac+raiz->tam_i == k)
+         return raiz->elem;
+      else if (k < ac+raiz->tam_i)
+         return kesimo(raiz->iz, k, ac);
+      else 
+         return kesimo(raiz->dr, k, ac + raiz->tam_i);
+   }
    int altura(Link a) {
       if (a == nullptr) return 0;
       else return a->altura;
@@ -166,6 +169,7 @@ protected:
       r1->dr = r2;
       r2->altura = std::max(altura(r2->iz), altura(r2->dr)) + 1;
       r1->altura = std::max(altura(r1->iz), altura(r1->dr)) + 1;
+      r2->tam_i=r2->tam_i-r1->tam_i;
       r2 = r1;
    }
 
@@ -173,6 +177,7 @@ protected:
       Link r2 = r1->dr;
       r1->dr = r2->iz;
       r2->iz = r1;
+      r2->tam_i++;
       r1->altura = std::max(altura(r1->iz), altura(r1->dr)) + 1;
       r2->altura = std::max(altura(r2->iz), altura(r2->dr)) + 1;
       r1 = r2;

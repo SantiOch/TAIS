@@ -3,7 +3,6 @@
  *
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
  * Alex Guillermo Bonilla Taco TAIS009
- * Santiago Ochoa de Zabalegui Velasco TAIS069
  *@ </authors> */
 
 #include <iostream>
@@ -11,13 +10,20 @@
 #include <memory>
 using namespace std;
 
-#include "set_tree.h"  // propios o los de las estructuras de datos de clase
+#include "TreeSet_AVL.h"  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
 
  Escribe aquí un comentario general sobre la solución, explicando cómo
  se resuelve el problema y cuál es el coste de la solución, en función
  del tamaño del problema.
+
+ Se ha modificado las funciones privadas de inserta(), otaIzq(), rotaDer() del TreeSet_AVL.h,
+ para que tam_i tenga su valor correcto.
+ La funcion kesimo comprueba que el valor acumulado al sumar los tam_i segun se va recorriendo los nodos hijos,
+ sea igual al valor kesimo. Si es asi se abra encontrado y se devuelve el valor k-esimo.
+ El caso especial de que el valor k sea mayor que el numero de elementos se controla dentro de resulve caso()
+ el valor de 
 
  @ </answer> */
 
@@ -34,7 +40,7 @@ bool resuelveCaso() {
    cin>>n;
    if (n==0)
       return false;
-   SetTree<int>tree;
+   Set<int>tree;
    int elem;
    for (int i = 0; i < n; i++)
    {
@@ -50,11 +56,13 @@ bool resuelveCaso() {
    for (int i = 0; i < n; i++)
    {
       cin>>k;
-      val = tree.kesimo(k);
-      if (val != 0)
-         cout << val << endl;
-      else
+      if (k>tree.size()){
          cout << "??\n";
+      }else{
+      val = tree.kesimo(k);
+         cout << val << endl;
+         
+      }
    }
    cout<<"---\n";
 

@@ -20,6 +20,13 @@ using namespace std;
  Escribe aquí un comentario general sobre la solución, explicando cómo
  se resuelve el problema y cuál es el coste de la solución, en función
  del tamaño del problema.
+
+ Para comprobar que es un arbol AVL, veo si las ramas izquierdas que nacen de todos los nodos cumplen que
+ el menores estricto y tods las ramas derechas cumplen que son mayores estricto.
+ El arbol vacio se concidera AVL.
+ Ademas se comprueba recursivamente a traves de la variable bool balanced que este equilibrado recursivamente,
+ comprobando que la diferencia de las alturas de sus ramas no supere en 1.
+ El coste en tiempo del metodo esAVL es O(n),puesto que tienen que recorrer  todos los nodos hijos.
  
  @ </answer> */
 
@@ -29,7 +36,7 @@ using namespace std;
 // ================================================================
 //@ <answer>
 template<typename T>
-// Bal, avl, altura, maxIzq, minDer;
+
 tuple<bool, bool, int, T, T> esAVL(const BinTree<T> &tree){
   
   if(tree.empty()) return { true, true, 0, T(), T()};
@@ -89,9 +96,6 @@ bool resuelveCaso() {
     if(avl && bal) cout << "SI" << endl;
     else cout << "NO" <<endl;
   }
-  // resolver el caso posiblemente llamando a otras funciones
-
-  // escribir la solución
   
   return true;
 }
