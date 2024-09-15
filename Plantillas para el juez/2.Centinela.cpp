@@ -2,7 +2,7 @@
 /*@ <authors>
  *
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
- *
+ * Alex Guillermo Bonilla Taco TAIS009
  *@ </authors> */
 
 #include <iostream>
