@@ -150,7 +150,7 @@ protected:
          crece = false;
       return crece;
    }
-   T const &kesimo(const Link &raiz, int k, const int &ac) const{
+   T const & kesimo(const Link &raiz, int k, const int &ac) const{
       if (ac+raiz->tam_i == k)
          return raiz->elem;
       else if (k < ac+raiz->tam_i)
@@ -177,9 +177,9 @@ protected:
       Link r2 = r1->dr;
       r1->dr = r2->iz;
       r2->iz = r1;
-      r2->tam_i++;
       r1->altura = std::max(altura(r1->iz), altura(r1->dr)) + 1;
       r2->altura = std::max(altura(r2->iz), altura(r2->dr)) + 1;
+      r2->tam_i=r2->tam_i+r1->tam_i;
       r1 = r2;
    }
 

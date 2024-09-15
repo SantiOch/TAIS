@@ -8,6 +8,8 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include <exception>
+#include <stdexcept>
 using namespace std;
 
 #include "TreeSet_AVL.h"  // propios o los de las estructuras de datos de clase
@@ -25,6 +27,7 @@ using namespace std;
  El caso especial de que el valor k sea mayor que el numero de elementos se controla dentro de resulve caso()
  el valor de 
 
+ El coste de la solucion es O(log n) en el peor de los casos, ya que se recorre un arbol que es AVL.
  @ </answer> */
 
 
@@ -56,7 +59,7 @@ bool resuelveCaso() {
    for (int i = 0; i < n; i++)
    {
       cin>>k;
-      if (k>tree.size()){
+      if (k>tree.size()||tree.empty()){
          cout << "??\n";
       }else{
       val = tree.kesimo(k);
