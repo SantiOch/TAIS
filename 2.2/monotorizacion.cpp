@@ -2,15 +2,15 @@
 /*@ <authors>
  *
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
- *
+ * ALEX GUILLERMO BONILLA TACO TAIS009
  *@ </authors> */
 
 #include <iostream>
 #include <fstream>
-#include <...>
+#include <queue>
 using namespace std;
 
-#include "..."  // propios o los de las estructuras de datos de clase
+
 
 /*@ <answer>
 
@@ -25,17 +25,56 @@ using namespace std;
 // Escribe el código completo de tu solución aquí debajo
 // ================================================================
 //@ <answer>
+struct registro
+{
+   int momento;
+   int id;
+   int repeticion;
+};
+
+bool operator <(registro a,registro b){
+   
+}
+bool operator >(registro a,registro b){
+
+}
+int turno(priority_queue<registro,vector<registro>,greater<registro>>cola){
+   int t;
+
+   return t;
+}
 
 bool resuelveCaso() {
 
    // leer los datos de la entrada
-
-   if (caso especial)
+   int n;
+   cin>>n;
+   if (n==0)
       return false;
 
    // resolver el caso posiblemente llamando a otras funciones
+   priority_queue<registro,vector<registro>,greater<registro>>cola;
+   int id,momento;
+   registro reg;
+   for (int i = 0; i < n; i++)
+   {
+      cin>>id>>momento;
+      reg.id=id;
+      reg.momento=momento;
+      reg.repeticion=momento;
+      cola.push(reg);
+   }
 
    // escribir la solución
+   int veces;
+   cin >>veces;
+   while (--veces)
+   {
+      cout<<turno(cola);
+      cout<<endl;
+   }
+   cout<<"---\n";
+   
 
    return true;
 }
