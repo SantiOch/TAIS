@@ -20,8 +20,7 @@ using namespace std;
  del tamaño del problema.
 
  Se resuelve con el TAD de colas de prioridad, en la que se usa la clase priority_queue de maximos.
- El coste de la funcion calcular_coste() es O(N), porque procesa los n elementos que contiene la cola.
- El coste de la insercion de todos los elemnos es de log(N log n)
+ El coste de la funcion calcular_coste() es log(N log n)
 
  @ </answer> */
 
@@ -31,7 +30,7 @@ using namespace std;
 // ================================================================
 //@ <answer>
 long long int calcula_coste(priority_queue<long long int,vector<long long int>,greater<long long int>>cola){
-   long long int coste, top1, top2= 0;
+   long long int coste=0, top1=0, top2= 0;
    while (cola.size() > 1){
       top1 = 0; top2 = 0;
       top1 += cola.top();
