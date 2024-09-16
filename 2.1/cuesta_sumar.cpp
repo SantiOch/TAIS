@@ -7,16 +7,21 @@
 
 #include <iostream>
 #include <fstream>
-#include <...>
+#include <queue>
 using namespace std;
 
-#include "..."  // propios o los de las estructuras de datos de clase
+
+//#include "..."  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
 
  Escribe aquí un comentario general sobre la solución, explicando cómo
  se resuelve el problema y cuál es el coste de la solución, en función
  del tamaño del problema.
+
+ Se resuelve con el TAD de colas de prioridad, en la que se usa la clase priority_queue de maximos.
+ El coste de la funcion calcular_coste() es O(N), porque procesa los n elementos que contiene la cola.
+ El coste de la insercion de todos los elemnos es de log(N log n)
 
  @ </answer> */
 
@@ -25,18 +30,42 @@ using namespace std;
 // Escribe el código completo de tu solución aquí debajo
 // ================================================================
 //@ <answer>
+long long int calcula_coste(priority_queue<long long int,vector<long long int>,greater<long long int>>cola){
+   long long int coste, top1, top2= 0;
+   while (cola.size() > 1){
+      top1 = 0; top2 = 0;
+      top1 += cola.top();
+      cola.pop();
+      top2 += cola.top();
+      cola.pop();
 
+      top1 += top2;  
+      coste += top1;  
+      cola.push(top1); 
+   }
+
+   return coste;
+}
 bool resuelveCaso() {
 
    // leer los datos de la entrada
-
-   if (caso especial)
+   int n;
+   cin >>n;
+   if (n==0)
       return false;
 
-   // resolver el caso posiblemente llamando a otras funciones
-
+   long long int elem;
+   priority_queue<long long int,vector<long long int>,greater<long long int>>cola;
+   for (int i = 0; i < n; i++)
+   {
+      cin>>elem;
+      cola.push(elem);
+   }
+   
+   // resolver el caso posiblemente llamando top1 otras funciones
+   long long int coste=calcula_coste(cola);
    // escribir la solución
-
+   cout<<coste<<endl;
    return true;
 }
 
