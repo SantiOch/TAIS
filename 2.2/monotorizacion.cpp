@@ -33,14 +33,24 @@ struct registro
 };
 
 bool operator <(registro a,registro b){
-   
+   if(a.momento<b.momento)
+      return true;
+   else if(a.momento==b.momento&&a.id<b.id)
+      return true;
+   else 
+      return false;
 }
 bool operator >(registro a,registro b){
 
 }
 int turno(priority_queue<registro,vector<registro>,greater<registro>>cola){
-   int t;
-
+   int t=0,momento=0;
+   registro r;
+   r=cola.top();
+   t=r.id;
+   cola.pop();
+   r.momento+=r.repeticion;
+   cola.push(r);
    return t;
 }
 
@@ -56,8 +66,7 @@ bool resuelveCaso() {
    priority_queue<registro,vector<registro>,greater<registro>>cola;
    int id,momento;
    registro reg;
-   for (int i = 0; i < n; i++)
-   {
+   for (int i = 0; i < n; i++){
       cin>>id>>momento;
       reg.id=id;
       reg.momento=momento;
