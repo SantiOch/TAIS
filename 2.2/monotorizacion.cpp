@@ -29,29 +29,29 @@ struct registro
 {
    int momento;
    int id;
-   int repeticion;
+   int periodo;
 };
 
-bool operator <(registro a,registro b){
-   return a.momento < b.momento || (a.momento == b.momento && a.id < b.id);
+bool operator <(registro const& a,registro const& b){
+   return b.momento < a.momento || (b.momento == a.momento && b.id < a.id);
 }
-bool operator >(registro a,registro b){
-   return b<a;
-}
-struct comp_registro{
-   bool operator()(registro a, registro b) {
-      return b.momento <a.momento||(a.momento==b.momento&&b.id<a.id);
-   }
-};
+// bool operator >(registro a,registro b){
+//    return a<b;
+// }
+// struct comp_registro{
+//    bool operator()(registro a, registro b) {
+//       return b.momento <a.momento||(a.momento==b.momento&&b.id<a.id);
+//    }
+// };
 
 
-int turno(priority_queue<registro,vector<registro>,greater<registro>>&cola){
+int turno(priority_queue<registro>&cola){
    int t = 0, momento = 0;
    registro r;
    r = cola.top();
    t = r.id;
    cola.pop();
-   r.momento += r.repeticion;
+   r.momento += r.periodo;
    cola.push(r);
    return t;
 }
@@ -65,30 +65,25 @@ bool resuelveCaso() {
       return false;
 
    // resolver el caso posiblemente llamando a otras funciones
-   priority_queue<registro,vector<registro>,greater<registro>>cola;
+   priority_queue<registro>cola;
    int id,momento;
    registro reg;
    for (int i = 0; i < n; i++){
       cin >> id >> momento;
       reg.id = id;
       reg.momento = momento;
-      reg.repeticion = momento;
+      reg.periodo = momento;
       cola.push(reg);
    }
 
    // escribir la solución
    int veces;
    cin >>veces;
-   if (cola.size() == 1){
-      while (veces--){
-         cout << cola.top().id << endl;
-      }
-      return true;
-   }else{
-      while (veces--){
-         cout << turno(cola);
-         cout << endl;
-      }
+
+   while (veces--)
+   {
+      cout << turno(cola);
+      cout << endl;
    }
 
    cout<<"---\n";
