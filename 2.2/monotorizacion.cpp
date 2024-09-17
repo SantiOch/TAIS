@@ -2,7 +2,7 @@
 /*@ <authors>
  *
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
- * ALEX GUILLERMO BONILLA TACO TAIS009
+ * ALEX GUILLERMO BONILLA TACO (TAIS009)
  *@ </authors> */
 
 #include <iostream>
@@ -33,23 +33,25 @@ struct registro
 };
 
 bool operator <(registro a,registro b){
-   if(a.momento<b.momento)
-      return true;
-   else if(a.momento==b.momento&&a.id<b.id)
-      return true;
-   else 
-      return false;
+   return a.momento < b.momento || (a.momento == b.momento && a.id < b.id);
 }
 bool operator >(registro a,registro b){
-
+   return b<a;
 }
-int turno(priority_queue<registro,vector<registro>,greater<registro>>cola){
-   int t=0,momento=0;
+struct comp_registro{
+   bool operator()(registro a, registro b) {
+      return b.momento <a.momento||(a.momento==b.momento&&b.id<a.id);
+   }
+};
+
+
+int turno(priority_queue<registro,vector<registro>,greater<registro>>&cola){
+   int t = 0, momento = 0;
    registro r;
-   r=cola.top();
-   t=r.id;
+   r = cola.top();
+   t = r.id;
    cola.pop();
-   r.momento+=r.repeticion;
+   r.momento += r.repeticion;
    cola.push(r);
    return t;
 }
@@ -67,21 +69,28 @@ bool resuelveCaso() {
    int id,momento;
    registro reg;
    for (int i = 0; i < n; i++){
-      cin>>id>>momento;
-      reg.id=id;
-      reg.momento=momento;
-      reg.repeticion=momento;
+      cin >> id >> momento;
+      reg.id = id;
+      reg.momento = momento;
+      reg.repeticion = momento;
       cola.push(reg);
    }
 
    // escribir la solución
    int veces;
    cin >>veces;
-   while (--veces)
-   {
-      cout<<turno(cola);
-      cout<<endl;
+   if (cola.size() == 1){
+      while (veces--){
+         cout << cola.top().id << endl;
+      }
+      return true;
+   }else{
+      while (veces--){
+         cout << turno(cola);
+         cout << endl;
+      }
    }
+
    cout<<"---\n";
    
 
