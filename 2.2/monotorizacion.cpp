@@ -2,7 +2,7 @@
 /*@ <authors>
  *
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
- * ALEX GUILLERMO BONILLA TACO (TAIS009)
+ * TAIS009 ALEX GUILLERMO BONILLA TACO 
  *@ </authors> */
 
 #include <iostream>
@@ -52,7 +52,7 @@ int turno(priority_queue<registro>&cola){
    t = r.id;
    cola.pop();
    r.momento += r.periodo;
-   cola.push(r);
+   cola.push(r); //O(log n)
    return t;
 }
 
@@ -80,9 +80,9 @@ bool resuelveCaso() {
    int veces;
    cin >>veces;
 
-   while (veces--)
+   while (veces--)//O(n)
    {
-      cout << turno(cola);
+      cout << turno(cola);//O(log n)
       cout << "\n";
    }
 

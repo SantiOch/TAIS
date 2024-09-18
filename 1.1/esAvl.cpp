@@ -2,8 +2,8 @@
 /*@ <authors>
  *
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
- * Alex Guillermo Bonilla Taco TAIS009
- * Santiago Ochoa de Zabalegui Velasco TAIS069
+ * TAIS009 Alex Guillermo Bonilla Taco 
+ * TAIS069 Santiago Ochoa de Zabalegui Velasco 
  *@ </authors> */
 
 #include <iostream>
@@ -41,8 +41,8 @@ tuple<bool, bool, int, T, T> esAVL(const BinTree<T> &tree){
   
   if(tree.empty()) return { true, true, 0, T(), T()};
   
-  auto [bal_left, avl_left, height_left, maxIzq, minIzq] = esAVL(tree.left());
-  auto [bal_right, avl_right, height_right, maxDer, minDer] = esAVL(tree.right());
+  auto [bal_left, avl_left, height_left, maxIzq, minIzq] = esAVL(tree.left());//O(N/2)
+  auto [bal_right, avl_right, height_right, maxDer, minDer] = esAVL(tree.right());//O(N/2)
   
   bool balanced = bal_left && bal_right && abs(height_left - height_right) <= 1;
   bool avl_root = true;
@@ -91,7 +91,7 @@ bool resuelveCaso() {
   else if(c == 'P'){
    
     BinTree<string> tree = read_tree<string>(cin);
-    auto [bal, avl, height, izq, der] = esAVL(tree);
+    auto [bal, avl, height, izq, der] = esAVL(tree);//O(N)
   
     if(avl && bal) cout << "SI" << endl;
     else cout << "NO" <<endl;

@@ -2,7 +2,7 @@
 /*@ <authors>
  *
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
- * Alex Guillermo Bonilla Taco TAIS009
+ * TAIS009 Alex Guillermo Bonilla Taco
  *@ </authors> */
 
 #include <iostream>
@@ -24,8 +24,8 @@ using namespace std;
  para que tam_i tenga su valor correcto.
  La funcion kesimo comprueba que el valor acumulado al sumar los tam_i segun se va recorriendo los nodos hijos,
  sea igual al valor kesimo. Si es asi se abra encontrado y se devuelve el valor k-esimo.
- El caso especial de que el valor k sea mayor que el numero de elementos se controla dentro de resulve caso()
- el valor de 
+ El caso especial de que el valor k sea mayor que el numero de elementos o que sea un arbol vacio se controla dentro de resulve caso()
+ el valor devuelto es 0
 
  El coste de la solucion es O(log n) en el peor de los casos, ya que se recorre un arbol que es AVL.
  @ </answer> */
@@ -62,7 +62,7 @@ bool resuelveCaso() {
       if (k>tree.size()||tree.empty()){
          cout << "??\n";
       }else{
-      val = tree.kesimo(k);
+      val = tree.kesimo(k);//O(log n)
          cout << val << endl;
          
       }
