@@ -17,7 +17,15 @@ using namespace std;
  Escribe aquí un comentario general sobre la solución, explicando cómo
  se resuelve el problema y cuál es el coste de la solución, en función
  del tamaño del problema.
+ 
+ Usamos unsa estructura registro para guardar sus datos y simular el momento que le corresponde el turno en cada iteracion de tiempo.
+ Se leen todos los datos y los metemos en una cola de prioridad de minimos, después se lee las k veces de envíos e iteramos llamando a la función
+ turno() que nos devolvera el id correspondiente a la iteracion.
+ En la funcion turno, almacenamos en el registro r, el minimo de la cola, sumamos el periodo a su momento y lo volvemos a meter en la cola,
+ y devolvemos el id de r.
 
+ El coste es de resuelve caso es O(k log n) sien k el numero de veces que realiza el bucle donde se encuentra la funcion turno() y log n,
+ el coste de la funcion turno() puesto que se hace push(), que tiene coste log n.
  @ </answer> */
 
 
@@ -35,18 +43,10 @@ struct registro
 bool operator <(registro const& a,registro const& b){
    return b.momento < a.momento || (b.momento == a.momento && b.id < a.id);
 }
-// bool operator >(registro a,registro b){
-//    return a<b;
-// }
-// struct comp_registro{
-//    bool operator()(registro a, registro b) {
-//       return b.momento <a.momento||(a.momento==b.momento&&b.id<a.id);
-//    }
-// };
 
 
 int turno(priority_queue<registro>&cola){
-   int t = 0, momento = 0;
+   int t = 0;
    registro r;
    r = cola.top();
    t = r.id;
@@ -83,7 +83,7 @@ bool resuelveCaso() {
    while (veces--)
    {
       cout << turno(cola);
-      cout << endl;
+      cout << "\n";
    }
 
    cout<<"---\n";
