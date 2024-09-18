@@ -3,6 +3,7 @@
  *
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
  * TAIS009 ALEX GUILLERMO BONILLA TACO 
+ * TAIS069 Santiago Ochoa de Zabalegui Velasco 
  *@ </authors> */
 
 #include <iostream>
