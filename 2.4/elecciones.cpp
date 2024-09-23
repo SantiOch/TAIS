@@ -34,12 +34,13 @@ struct Partido
    float coeficiente;
    int pos;
 };
-bool operator <(const Partido & a, const Partido & b){
-   return a.coeficiente < b.coeficiente || (a.coeficiente == b.coeficiente && a.pos > b.pos);
+bool operator < (const Partido & a, const Partido & b){
+   bool es_menor=b.coeficiente < a.coeficiente || (a.coeficiente == b.coeficiente && b.pos < a.pos);
+   return es_menor;
 }
-bool operator>(const Partido &a, const Partido &b){
-   return a.coeficiente > b.coeficiente || (a.coeficiente == b.coeficiente && a.pos < b.pos);
-} 
+// bool operator > (const Partido &a, const Partido &b){
+//    return a.coeficiente > b.coeficiente || (a.coeficiente == b.coeficiente && a.pos < b.pos);
+// } 
 
 void cal_num_escanyos(priority_queue<Partido> &cola)
 {
@@ -59,17 +60,17 @@ bool resuelveCaso() {
       return false;
 
    // resolver el caso posiblemente llamando a otras funciones
-   priority_queue<Partido, vector<Partido>, greater<Partido>> cola;
+   priority_queue<Partido> cola;
    list <Partido>lista;
    int e = 0, v = 0, p = 0;
    Partido partido;
    for (int i = 0; i < c; i++)
    {
-      cin >>v;
-      partido.votos=v;
-      partido.escanyos=e;
-      partido.pos=p;
-      partido.coeficiente = v / (1.0 + e);
+      cin >> v;
+      partido.pos = p;
+      partido.votos = v;
+      partido.escanyos = e;
+      partido.coeficiente = v / 1.0;
       cola.push(partido);
       lista.push_back(partido);
       p++;
