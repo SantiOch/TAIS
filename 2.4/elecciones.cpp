@@ -44,15 +44,14 @@ struct Partido{
    int escanyos;
    float coeficiente;
    int pos;
-   Partido(int v,int e,int c,int p) : votos(v), escanyos(e), coeficiente(c), pos(p) {}
+   Partido(int v,int e,int c,int p): votos(v), escanyos(e), coeficiente(c), pos(p) {}
 };
-struct Comparator{
-   bool operator()(const Partido *a, const Partido *b)
-   {
+
+struct Comparator {
+   bool operator()(const Partido *a, const Partido *b) {
       return b->coeficiente > a->coeficiente || (a->coeficiente == b->coeficiente && b->votos > a->votos) || (a->coeficiente == b->coeficiente && a->votos==b->votos &&  b->pos < a->pos);
    }
 };
-
 
 void cal_num_escanyos(priority_queue<Partido*,vector<Partido*>,Comparator>&cola){
    Partido *p;
@@ -60,7 +59,7 @@ void cal_num_escanyos(priority_queue<Partido*,vector<Partido*>,Comparator>&cola)
    cola.pop();     // 0(1)
    p->escanyos++;
    p->coeficiente = p->votos / (1.0 + p->escanyos);
-   cola.push(p); // 0(logn)
+   cola.push(p); // 0(logn)   
 }
 bool resuelveCaso() {
 

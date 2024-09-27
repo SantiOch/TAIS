@@ -46,7 +46,7 @@ void tratarPaciente(priority_queue<Paciente> &cola) {
 }
 
 bool resuelveCaso() {
-
+   
    // leer los datos de la entrada
    int num;
    cin >> num;
