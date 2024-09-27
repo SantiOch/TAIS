@@ -8,9 +8,9 @@
 
 #include <iostream>
 #include <fstream>
-using namespace std;
+#include <queue>
 
-#include "..."  // propios o los de las estructuras de datos de clase
+using namespace std;
 
 /*@ <answer>
 
@@ -29,13 +29,25 @@ using namespace std;
 bool resuelveCaso() {
 
    // leer los datos de la entrada
-   int edad, parejas;
+   long long int edad, parejas;
 
    cin >> edad >> parejas;
 
    if (edad == 0 && parejas == 0)
       return false;
 
+   priority_queue<int, greater<int>> mini;
+   priority_queue<int> maxi;
+   
+   maxi.push(edad);
+
+   for (long long int i = 0; i < parejas; i++) {
+      long long int p1, p2, medio;
+      cin >> p1 >> p2;
+      medio = maxi.top();
+      
+   }
+   
    // resolver el caso posiblemente llamando a otras funciones
 
    // escribir la solución
