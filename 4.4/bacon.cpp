@@ -8,10 +8,13 @@
 
 #include <iostream>
 #include <fstream>
-#include <...>
+#include <vector>
+#include <unordered_set>
+#include <unordered_map>
+
 using namespace std;
 
-#include "..."  // propios o los de las estructuras de datos de clase
+ #include "grafo.h"  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
 
@@ -30,10 +33,28 @@ using namespace std;
 bool resuelveCaso() {
 
    // leer los datos de la entrada
-
+   int p;
+   cin>>p;
    if (!std::cin)  // fin de la entrada
       return false;
+   unordered_map<string,unordered_set<string>>grafo;
+   string pelicula,actor;
+   int num_act;
+   for (int i = 0; i < p; i++)
+   {
+      cin>>pelicula;
+      grafo.insert_or_assign(pelicula);
+      cin>>num_act;
+      unordered_set<string>actores_pelicula;
+      for (int j = 0; j < num_act; j++)
+      {
+         cin>>actor;
+         actores_pelicula.insert(actor);
 
+      }
+      
+   }
+   
    // resolver el caso posiblemente llamando a otras funciones
 
    // escribir la solución
