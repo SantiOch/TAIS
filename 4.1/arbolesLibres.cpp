@@ -20,6 +20,12 @@ using namespace std;
  se resuelve el problema y cuál es el coste de la solución, en función
  del tamaño del problema.
  
+ Para comprobar si un grafo es un árbol libre, primero, se ha consruido el grafo con grafo.h.
+ Después, se ha creado una función resolver() que recibe el grafo y llama a recorrerGrafo(), para que recursivamente lo recorra
+ y vaya marcando los vértices visitados. Si el número de vértices visitados es igual al número de vértices del grafo y 
+ el número de aristas es igual al número de vértices - 1, entonces es un árbol libre.
+
+ El coste del algoritmo es O(V), donde V es el número de vértices que recorre la función recorrerGrafo().
  @ </answer> */
 
 

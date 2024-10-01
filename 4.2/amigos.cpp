@@ -19,6 +19,12 @@ using namespace std;
  se resuelve el problema y cuál es el coste de la solución, en función
  del tamaño del problema.
  
+ Para calcular el numero de amigos en el grupo más grande, se ha construido el grafo con grafo.h. Despues, se ha creado una función resolver() que recibe el grafo 
+ y llama a recorrerGrafo() para cada vertice que no haya sido visitado aun, para que recursivamente lo recorra, vaya marcando los vértices visitados y devuelva el numero
+ de amigos que tiene el grupo. En cada iteracion del bucle de resolver() se actualiza el mayor grupo si el numero de amigos del grupo actual es mayor que el mayor grupo. 
+
+ El coste de es O(V) siendo V el número de vértices del grafo, ya que se recorre el grafo una vez y se recorre cada vértice una vez. 
+ Si el número de amigos adyacentes es mayor que el mayor grupo, se actualiza el mayor grupo.
  @ </answer> */
 
 
