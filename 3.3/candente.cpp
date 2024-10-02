@@ -22,12 +22,7 @@ using namespace std;
  se resuelve el problema y cuál es el coste de la solución, en función
  del tamaño del problema.
  
- Para resolver el problema se ha utilizado un unordered_map<string,unordered_set<string>> que representa un grafo no dirigido entre actores y peliculas,
- despues de leer los datos de entrada se recorre el grafo con un bfs desde el actor dado hasta encontrar a KevinBacon o hasta que no haya mas actores.
- Si KevinBacon no esta en el grafo se imprime INF, si se encuentra se imprime el numero de saltos que se han dado para llegar a KevinBacon.
- 
- El coste de la solución es O(N * V) donde N es el numero de actores que se quieren buscar en el grafo y V es el numero de vertices del grafo.
- @ </answer> */
+@ </answer> */
 
 
 // ================================================================
@@ -39,19 +34,26 @@ struct tema {
   string nombre;
   int numeroCitado;
   int ultimaVezCitado;
-  
+    
   bool operator<(const tema &otro) const {
     return numeroCitado > otro.numeroCitado || (numeroCitado == otro.numeroCitado && ultimaVezCitado > otro.ultimaVezCitado);
   }
 };
 
-void imprime(IndexPQ<tema> cola) {
+void imprime(IndexPQ<tema> &cola) {
   int contador = 1;
+  vector<pair<int,tema>> perdidos;
   while (!cola.empty() && contador <= 3 && cola.top().prioridad.numeroCitado != 0) {
-    cout << contador << " " << cola.top().prioridad.nombre << "\n";
+    auto t = cola.top();
+    cout << contador << " " << t.prioridad.nombre << "\n";
+    perdidos.push_back({t.elem, t.prioridad});
     cola.pop();
     contador++;
   }
+  for(const auto& t: perdidos) {
+    cola.push(t.first, t.second);
+  }
+  
 }
 
 bool resuelveCaso() {
@@ -92,7 +94,7 @@ bool resuelveCaso() {
         nombresYNumeroCitas[nombre] = { posCola, num};
         cola.push(posCola++, t);
       } else {
-        pair<int, int> cita = nombresYNumeroCitas[nombre];
+        pair<int, int> &cita = nombresYNumeroCitas[nombre];
         cita.second += num;
         t.numeroCitado = cita.second;
         cola.update(cita.first, t);
