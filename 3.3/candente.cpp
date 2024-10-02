@@ -34,7 +34,7 @@ struct tema {
   string nombre;
   int numeroCitado;
   int ultimaVezCitado;
-    
+  tema(string nom="",int n=0,int u=0):nombre(nom), numeroCitado(n),ultimaVezCitado(u){}
   bool operator<(const tema &otro) const {
     return numeroCitado > otro.numeroCitado || (numeroCitado == otro.numeroCitado && ultimaVezCitado > otro.ultimaVezCitado);
   }
