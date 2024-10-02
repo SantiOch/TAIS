@@ -39,6 +39,12 @@ struct tema {
     return numeroCitado > otro.numeroCitado || (numeroCitado == otro.numeroCitado && ultimaVezCitado > otro.ultimaVezCitado);
   }
 };
+struct datos_tema
+{
+  int posicion_cola;
+  int num_citas;
+  int ultima_mencion;
+};
 
 void imprime(IndexPQ<tema> &cola) {
   int contador = 1;
@@ -65,7 +71,7 @@ bool resuelveCaso() {
     return false;
 
   IndexPQ<tema> cola(n);
-  unordered_map<string, pair<int, int>> nombresYNumeroCitas;
+  unordered_map<string,datos_tema>mapa_datos;
   string letras;
   string nombre;
   int posCola = 0;
@@ -77,11 +83,10 @@ bool resuelveCaso() {
       cin >> nombre;
       cin >> num;
 
-      pair<int, int> citas = nombresYNumeroCitas[nombre];
-      int numeroCola = citas.first;
-      int numeroCitas = citas.second;
-      
-      cola.update(numeroCola, { nombre, numeroCitas - num, i });
+      datos_tema dt =mapa_datos[nombre];
+      dt.num_citas-=num;
+      mapa_datos[nombre]=dt;
+      cola.update(dt.posicion_cola,{nombre,dt.num_citas,dt.ultima_mencion});
       
     } else if (letras == "C") {
       
@@ -89,15 +94,15 @@ bool resuelveCaso() {
       cin >> num;
       
       tema t(nombre, num, i);
-      
-      if (nombresYNumeroCitas.find(nombre) == nombresYNumeroCitas.end()) {
-        nombresYNumeroCitas[nombre] = { posCola, num};
+      if(mapa_datos.find(nombre)==mapa_datos.end()){
+        mapa_datos[nombre]={posCola,num,i};
         cola.push(posCola++, t);
-      } else {
-        pair<int, int> &cita = nombresYNumeroCitas[nombre];
-        cita.second += num;
-        t.numeroCitado = cita.second;
-        cola.update(cita.first, t);
+      } else{
+        datos_tema dt = mapa_datos[nombre]; 
+        dt.num_citas+=num;
+        t.numeroCitado=dt.num_citas;
+        mapa_datos[nombre]=dt;
+        cola.update(dt.posicion_cola,t);
       }
     } else {
       imprime(cola);
