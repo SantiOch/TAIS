@@ -20,6 +20,15 @@ using namespace std;
  se resuelve el problema y cuál es el coste de la solución, en función
  del tamaño del problema.
 
+   Para resolver el problema se ha utilizado una cola de prioridad de la plantilla IndexPQ.h de maximos
+   para almacenar los canales de televisión y las audiencias que llevan en cada momento de tiempo como su prioridad variable. 
+   Además, se ha utilizado un vector de la structura canal para llamada canal en el que guardamos su indice y el tiempo que aparece el el prime.
+   El cual se va actualizando en cada iteracion del bucle de los N momentos.
+   Al final este vector es ordenado a travez de una cola de prioridades.
+
+   El coste en el bucle principal es de O(n * c * log c) donde n es el número de eventos y c el número de canales de televisión.
+   La ordenacion al final tambien tiene coste de O(nlogn) ya que ordena con una cola de prioridad.
+
  @ </answer> */
 
 
@@ -48,6 +57,7 @@ bool resuelveCaso() {
    // resolver el caso posiblemente llamando a otras funciones
    IndexPQ<int, greater<int>> canales(c);
    vector<canal> minutos;
+   
    int p;
    
    for (int i = 0; i < c; i++) {
@@ -60,7 +70,7 @@ bool resuelveCaso() {
    int anterior = 0, actual;
    for(int i = 0; i < n; i++) {
      
-       cin >> actual;
+      cin >> actual;
 
       int num, audiencia;
 
