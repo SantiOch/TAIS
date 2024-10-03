@@ -22,6 +22,14 @@ using namespace std;
  se resuelve el problema y cuál es el coste de la solución, en función
  del tamaño del problema.
  
+ La solución se basa en el uso de una cola de prioridad indexada (IndexPQ) para gestionar los temas y sus citas. 
+ Cada tema se almacena en un mapa (unordered_map) que permite acceder rápidamente a los datos de cada tema y su posicion en la cola para cuando
+ se necesite cambiar la prioridad.
+ 
+ El coste de las operaciones de añadir y eliminar citas es O(log n), donde n es el número de temas en la cola de prioridad.
+ Imprimir por pantalla tiene un coste constante para cada uno de los tres temas más citados, más el coste de restaurar la cola, 
+ que es O(log n) por cada tema restaurado, ya que la insercion en una cola de prioridad es logarítmica respecto al numero de elementos.
+  
 @ </answer> */
 
 
@@ -30,88 +38,74 @@ using namespace std;
 // ================================================================
 //@ <answer>
 
-struct tema {
-  string nombre;
-  int numeroCitado;
-  int ultimaVezCitado;
-  tema(string nom="",int n=0,int u=0):nombre(nom), numeroCitado(n),ultimaVezCitado(u){}
-  bool operator<(const tema &otro) const {
-    return numeroCitado > otro.numeroCitado || (numeroCitado == otro.numeroCitado && ultimaVezCitado > otro.ultimaVezCitado);
-  }
-};
-struct datos_tema
-{
-  int posicion_cola;
-  int num_citas;
-  int ultima_mencion;
+struct Tema {
+   string nombre;
+   int numeroCitado;
+   int ultimaVezCitado;
+
+   Tema(string nom = "", int n = 0, int u = 0): nombre(nom), numeroCitado(n), ultimaVezCitado(u) { }
+   
+   bool operator<(const Tema &otro) const {
+      return numeroCitado > otro.numeroCitado || (numeroCitado == otro.numeroCitado && ultimaVezCitado > otro.ultimaVezCitado);
+   }
 };
 
-void imprime(IndexPQ<tema> &cola) {
-  int contador = 1;
-  vector<pair<int,tema>> perdidos;
-  while (!cola.empty() && contador <= 3 && cola.top().prioridad.numeroCitado != 0) {
-    auto t = cola.top();
-    cout << contador << " " << t.prioridad.nombre << "\n";
-    perdidos.push_back({t.elem, t.prioridad});
-    cola.pop();
-    contador++;
-  }
-  for(const auto& t: perdidos) {
-    cola.push(t.first, t.second);
-  }
-  
+struct DatosTema {
+   int posicionCola;
+   int numCitas;
+};
+
+void imprime(IndexPQ<Tema> &cola) {
+   int contador = 1;
+   vector<pair<int, Tema>> perdidos;
+   while (!cola.empty() && contador <= 3 && cola.top().prioridad.numeroCitado != 0) {
+      auto t = cola.top();
+      cout << contador << " " << t.prioridad.nombre << "\n";
+      perdidos.push_back( {t.elem, t.prioridad} );
+      cola.pop();
+      contador++;
+   }
+   for(const auto& t: perdidos) {
+      cola.push(t.first, t.second);
+   }
 }
 
 bool resuelveCaso() {
-  
-  // leer los datos de la entrada
-  int n;
-  cin >> n;
-  if (!std::cin)  // fin de la entrada
-    return false;
+    int numOperaciones;
+    cin >> numOperaciones;
+    if (!cin) return false;
 
-  IndexPQ<tema> cola(n);
-  unordered_map<string,datos_tema>mapa_datos;
-  string letras;
-  string nombre;
-  int posCola = 0;
-  int num;
-  for(int i = 0; i < n; i++) {
-    cin >> letras;
-    
-    if (letras == "E") {
-      cin >> nombre;
-      cin >> num;
+    IndexPQ<Tema> cola(numOperaciones);
+    unordered_map<string, DatosTema> mapaTemas;
+    string comando, nombreTema;
+    int numCitas, posicionCola = 0;
 
-      datos_tema dt =mapa_datos[nombre];
-      dt.num_citas-=num;
-      mapa_datos[nombre]=dt;
-      cola.update(dt.posicion_cola,{nombre,dt.num_citas,dt.ultima_mencion});
-      
-    } else if (letras == "C") {
-      
-      cin >> nombre;
-      cin >> num;
-      
-      tema t(nombre, num, i);
-      if(mapa_datos.find(nombre)==mapa_datos.end()){
-        mapa_datos[nombre]={posCola,num,i};
-        cola.push(posCola++, t);
-      } else{
-        datos_tema dt = mapa_datos[nombre]; 
-        dt.num_citas+=num;
-        t.numeroCitado=dt.num_citas;
-        mapa_datos[nombre]=dt;
-        cola.update(dt.posicion_cola,t);
-      }
-    } else {
-      imprime(cola);
-      // Resolver
+    for (int i = 0; i < numOperaciones; i++) {
+         cin >> comando;
+         if (comando == "E") {
+            cin >> nombreTema >> numCitas;
+             auto& datosTema = mapaTemas[nombreTema];
+             datosTema.numCitas -= numCitas;
+             cola.update(datosTema.posicionCola, {nombreTema, datosTema.numCitas});
+         } else if (comando == "C") {
+            cin >> nombreTema >> numCitas;
+             Tema nuevoTema(nombreTema, numCitas, i);
+             if (mapaTemas.find(nombreTema) == mapaTemas.end()) {
+                  mapaTemas[nombreTema] = {posicionCola, numCitas};
+                  cola.push(posicionCola++, nuevoTema);
+             } else {
+                  auto& datosTema = mapaTemas[nombreTema];
+                  datosTema.numCitas += numCitas;
+                  nuevoTema.numeroCitado = datosTema.numCitas;
+                  cola.update(datosTema.posicionCola, nuevoTema);
+             }
+         } else {
+             imprime(cola);
+         }
     }
-  }
-  cout << "---\n";
+    cout << "---\n";
 
-  return true;
+    return true;
 }
 
 //@ </answer>
