@@ -9,9 +9,6 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <map>
-#include <queue>
-#include <set>
 
 using namespace std;
 
@@ -31,14 +28,15 @@ using namespace std;
 // ================================================================
 //@ <answer>
 
-int recorreGrafo(const Grafo& g, vector<bool>& verticesVisitados,vector<int> &adyacentes, int verticeAct) {
+int recorreGrafo(const Grafo& g, vector<bool>& verticesVisitados,vector<int> &adyacentes,const int verticeAct) {
 
   int amigos = 1;
+  verticesVisitados[verticeAct] = true;
 
   for (int i: g.ady(verticeAct)) {
     if (!verticesVisitados[i]) {
-      verticesVisitados[i] = true;
       amigos += recorreGrafo(g, verticesVisitados, adyacentes, i);
+      verticesVisitados[i]  = true;
       adyacentes.push_back(i);
     }
   }
@@ -46,23 +44,14 @@ int recorreGrafo(const Grafo& g, vector<bool>& verticesVisitados,vector<int> &ad
   return amigos;
 }
 
-void resolver(const Grafo &g, vector<bool>&  verticesVisitados, vector<int>& solucion,vector<int>& sol_grupos,map<int,int>mapa_grupos) {
-   vector<int> adyacentes;
-   queue<int>cola_grupos;
-   set<int>grupos_actuales;
+void resolver(const Grafo &g, vector<bool>& verticesVisitados, vector<int>& solucion) {
+  int amigos = 1;
   for(int i = 0; i < g.V(); i++) {
     if (!verticesVisitados[i]) {
-      verticesVisitados[i] = true;
-      if(grupos_actuales.find(i)==grupos_actuales.end()){
-         cola_grupos.push(mapa_grupos[i]);
-      }
-      solucion[i] = recorreGrafo(g, verticesVisitados, adyacentes, i);
-         
-      auto it = adyacentes.begin();
-      while(it != adyacentes.end()) {
-        solucion[*it] = solucion[i];
-        it = adyacentes.erase(it);
-      }
+      vector<int> adyacentes;
+      adyacentes.push_back(i);
+      amigos = recorreGrafo(g, verticesVisitados, adyacentes, i);
+      for (int j: adyacentes) solucion[j] = amigos;
     }
   }
 }
@@ -79,7 +68,6 @@ bool resuelveCaso() {
   if (!cin) return false;
   
   cin >> grupos;
-  map<int,int>mapa_grupos;
   
   Grafo g(vertices);
   
@@ -93,12 +81,10 @@ bool resuelveCaso() {
 
     if (nPersonas != 0) {
       cin >> p1;
-      mapa_grupos[p1]=i;
     }
 
     for (int j = 1; j < nPersonas; j++) {
       cin >> p2;
-      mapa_grupos[p2] = i;
       g.ponArista(p1 - 1, p2 - 1);
       p1 = p2;
     }
@@ -106,8 +92,8 @@ bool resuelveCaso() {
 
   vector<bool> verticesVisitados(vertices, false);
   vector<int> solucion(vertices, 0);
-  vector<int> sol_grupos(grupos);
-  resolver(g, verticesVisitados, solucion,sol_grupos);
+
+  resolver(g, verticesVisitados, solucion);
 
   for (int i = 0; i < vertices; i++) {
     cout << solucion[i] << " ";
