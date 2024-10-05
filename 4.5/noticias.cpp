@@ -15,11 +15,12 @@ using namespace std;
 #include "Grafo.h" // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
+  Para resolver el problema, se crea un grafo no dirigido con los datos de entrada. Siendo los vértices las personas y las aristas las relaciones de amistad.
+  Se recorre el grafo con un algoritmo de búsqueda en profundidad (DFS) para contar el número de amigos de cada persona(int amigo) 
+  y asignarle el mismo número de amigos a todas las personas de su grupo que se almacena en el vector solucion.
+  y a las personas de sus grupos adyacentes.
  
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
- 
+  El coste del metodo resolver es O(V), donde V es el número de vértices que recorre con el metodo dfs.
  @ </answer> */
 
 
@@ -28,14 +29,14 @@ using namespace std;
 // ================================================================
 //@ <answer>
 
-int recorreGrafo(const Grafo& g, vector<bool>& verticesVisitados,vector<int> &adyacentes,const int verticeAct) {
+int dfs(const Grafo& g, vector<bool>& verticesVisitados,vector<int> &adyacentes,const int verticeAct) {
 
   int amigos = 1;
   verticesVisitados[verticeAct] = true;
 
   for (int i: g.ady(verticeAct)) {
     if (!verticesVisitados[i]) {
-      amigos += recorreGrafo(g, verticesVisitados, adyacentes, i);
+      amigos += dfs(g, verticesVisitados, adyacentes, i);
       verticesVisitados[i]  = true;
       adyacentes.push_back(i);
     }
@@ -50,7 +51,7 @@ void resolver(const Grafo &g, vector<bool>& verticesVisitados, vector<int>& solu
     if (!verticesVisitados[i]) {
       vector<int> adyacentes;
       adyacentes.push_back(i);
-      amigos = recorreGrafo(g, verticesVisitados, adyacentes, i);
+      amigos = dfs(g, verticesVisitados, adyacentes, i);
       for (int j: adyacentes) solucion[j] = amigos;
     }
   }
