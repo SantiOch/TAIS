@@ -16,9 +16,12 @@ using namespace std;
 
 /*@ <answer>
  
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+Para resolver el problema, se crea un grafo no dirigido con los datos de entrada. Siendo los vertices los nodos(estaciones) y las aristas las conexiones entre ellos.
+Se recorre el grafo en el metodo resuelveTTL() con un algoritmo de búsqueda en anchura (BFS) para contar el número de nodos alcanzables desde el nodo de inicio con un limite de saltos (ttl) 
+y se resta al total de nodos del grafo. Haciendo que devuelva el numero total de nodos inalacanzables.
+
+El coste del metodo resuelve ttl es O(V), donde V es el número de vértices, teniendo en el caso peor que recorrer todos los nodos del grafo, 
+cuando el ttl es mayor que el numero de nodos del grafo.
  
  @ </answer> */
 
