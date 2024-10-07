@@ -42,6 +42,7 @@ void dfs(const Digrafo& grafo, int tarea, vector<bool>& visitado, list<int>& tar
       dfs(grafo, adyacente, visitado, tareasEnOrden, enPila, hayCiclo);
     } else if (enPila[adyacente]) {
       hayCiclo = true;
+      return;
     }
   }
   
