@@ -17,9 +17,16 @@ using namespace std;
 #include "Grafo.h" // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
- 
+ Para resolver el problema, hemos creado un grafo con los datos de entrada, y resuelve sombras() calcula las distancias que tiene
+ cada vertice a inicioAlex, inicioLucas, destino, llamando a bfs en cada caso. Para calcular la distancia minima, recorremos de forma
+ lineal todos los vertices quedandonos con el menor sumatorio de distancias calculado.
 
- 
+ El coste en tiempo de resuelveSombras es de O(V + A), siendo V el numero de vertices y A el numero de aristas. 
+ Porque el coste de las busquedas en anchura es de O(V + A), y hacemos 3 busquedas en anchura, que en total es 
+ de 3 * O(V + A) = O(V + A). Luego hacemos un bucle que recorre todos los vertices, que tiene un coste de O(V) ya que recorre cada vertice
+ una sola vez haciendo operaciones de costa constante.
+
+
  @ </answer> */
 
 
@@ -28,75 +35,45 @@ using namespace std;
 // ================================================================
 //@ <answer>
 
-int resuelveSombras(const int &inicioAlex, const int &inicioLucas, const int &destino, const Grafo& g) {
-  
-  int nodosAlcanzables = 1;
-  
+
+void bfs(int inicio, const Grafo& g, vector<int>& distancias) {
+  vector<bool> visitados(g.V(), false);
   queue<int> cola;
-  vector<bool> visitadosAlex(g.V());
-  vector<bool> visitadosLucas(g.V());
-  vector<bool> visitadosDestino(g.V());
-  vector<int> distanciasAlex(g.V(), 0);
-  vector<int> distanciasLucas(g.V(), 0);
-  vector<int> distanciasDestino(g.V(), 0);
-  
-  visitadosAlex[inicioAlex] = true;
-  cola.push(inicioAlex);
+  visitados[inicio] = true;
+  cola.push(inicio);
 
   while (!cola.empty()) {
     int nodoActual = cola.front();
     cola.pop();
-    
-    for (int vecino: g.ady(nodoActual)) {
-      if (!visitadosAlex[vecino]) {
-        distanciasAlex[vecino] = distanciasAlex[nodoActual] + 1;
-        visitadosAlex[vecino] = true;
+
+    for (int vecino : g.ady(nodoActual)) {
+      if (!visitados[vecino]) {
+        distancias[vecino] = distancias[nodoActual] + 1;
+        visitados[vecino] = true;
         cola.push(vecino);
       }
     }
   }
-
-  visitadosLucas[inicioLucas] = true;
-  cola.push(inicioLucas);
-   
-    while (!cola.empty()) {
-    int nodoActual = cola.front();
-    cola.pop();
-    
-    for (int vecino: g.ady(nodoActual)) {
-      if (!visitadosLucas[vecino]) {
-        distanciasLucas[vecino] = distanciasLucas[nodoActual] + 1;
-        visitadosLucas[vecino] = true;
-        cola.push(vecino);
-      }
-    }
-  }
-
-  visitadosDestino[destino] = true;
-  cola.push(destino);
-
-    while (!cola.empty()) {
-    int nodoActual = cola.front();
-    cola.pop();
-    
-    for (int vecino: g.ady(nodoActual)) {
-      if (!visitadosDestino[vecino]) {
-        distanciasDestino[vecino] = distanciasDestino[nodoActual] + 1;
-        visitadosDestino[vecino] = true;
-        cola.push(vecino);
-      }
-    }
-  }
-
-  int minVal = INT_MAX;
-    for (int i = 0; i < g.V(); i++) {
-        int suma = distanciasAlex[i] + distanciasLucas[i] + distanciasDestino[i];
-        minVal = min(minVal, suma);
-    }
-  
-  return minVal;
 }
 
+int resuelveSombras(const int &inicioAlex, const int &inicioLucas, const int &destino, const Grafo& g) {
+ 
+  vector<int> distanciasAlex(g.V(), 0);
+  vector<int> distanciasLucas(g.V(), 0);
+  vector<int> distanciasDestino(g.V(), 0);
+
+  bfs(inicioAlex, g, distanciasAlex);
+  bfs(inicioLucas, g, distanciasLucas);
+  bfs(destino, g, distanciasDestino);
+
+  int minVal = INT_MAX;
+  for (int i = 0; i < g.V(); i++) {
+    int suma = distanciasAlex[i] + distanciasLucas[i] + distanciasDestino[i];
+    minVal = min(minVal, suma);
+  }
+
+  return minVal;
+}
 bool resuelveCaso() {
   
   // leer los datos de la entrada
