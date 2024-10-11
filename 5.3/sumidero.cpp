@@ -18,7 +18,7 @@ using namespace std;
 
 /*@ <answer>
  
-   fsdhkjaflsdlkjh
+   fsdhkjaflsdlkjhfdsf
  El coste de la funcion es de O(V + A), siendo V el nume
  @ </answer> */
 
