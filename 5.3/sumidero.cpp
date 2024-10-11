@@ -16,11 +16,7 @@ using namespace std;
 
 #include "Digrafo.h" // propios o los de las estructuras de datos de clase
 
-/*@ <answer>
- 
 
- El coste de la funcion es de O(V + A), siendo V el nume
- @ </answer> */
 
 
 // ================================================================
