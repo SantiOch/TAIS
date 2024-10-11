@@ -17,13 +17,16 @@ using namespace std;
 #include "Digrafo.h" // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
-  El coste de la funcion es de O(V + A), siendo V el nume
+ 
+
+ @ </answer> */
+
 
 // ================================================================
 // Escribe el código completo de tu solución aquí debajo
 // ================================================================
 //@ <answer>
-*/
+
 
 bool resuelveCaso() {
   
@@ -35,30 +38,43 @@ bool resuelveCaso() {
   if (!cin)  // fin de la entrada
     return false;
   
-  Digrafo g(nodos);
+//  Digrafo g(nodos);
+  
+  vector<vector<bool>> matriz(nodos, vector<bool>(nodos, false));
   
   cin >> aristas;
   
   for (int i = 0; i < aristas; i++) {
     int n1, n2;
     cin >> n1 >> n2;
-    g.ponArista(n1, n2);
+    matriz[n1][n2] = true;
   }
   
-  Digrafo inverso = g.inverso();
+//  Digrafo inverso = g.inverso();
 
-  bool sumidero = false;
+  bool sumidero = true;
   int numSumidero = 0;
   
-  for (int i = 0; i < nodos; i++) {
-    auto gradoSalida = g.ady(i).size();
-    auto gradoEntrada = inverso.ady(i).size();
-    if (gradoEntrada == g.V() - 1 && gradoSalida == 0) {
-      sumidero = true;
-      numSumidero = i;
-      break;
+  for (int i = 1; i < nodos; i++) {
+    if (matriz[numSumidero][i]) numSumidero = i;
+  }
+  
+  for(int i = 0; i < nodos; i++) {
+    if (i != numSumidero){
+      if (!matriz[i][numSumidero]) sumidero = false;
+      if (matriz[numSumidero][i]) sumidero = false;
     }
   }
+  
+//  for (int i = 0; i < nodos; i++) {
+//    auto gradoSalida = g.ady(i).size();
+//    auto gradoEntrada = inverso.ady(i).size();
+//    if (gradoEntrada == g.V() - 1 && gradoSalida == 0) {
+//      sumidero = true;
+//      numSumidero = i;
+//      break;
+//    }
+//  }
   
   // Esribir solucion
   if (sumidero) {
@@ -67,7 +83,6 @@ bool resuelveCaso() {
     cout << "NO\n";
   }
 
-  
   return true;
 }
 
