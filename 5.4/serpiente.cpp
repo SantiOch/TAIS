@@ -29,8 +29,9 @@ using namespace std;
 bool resuelveCaso() {
 
    // leer los datos de la entrada
-
-   if (caso especial)
+   int n,k,s,e;
+   cin >> n >> k >> s >> e;
+   if (n == 0 && k == 0 && s == 0 && e == 0)
       return false;
 
    // resolver el caso posiblemente llamando a otras funciones
