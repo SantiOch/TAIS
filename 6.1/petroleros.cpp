@@ -16,9 +16,13 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Para resolver el problema, se crea un conjunto disjunto con los datos de entrada que almacenara la informacion de las manchas de petroleo.
+ Cada vez que se encuentra una mancha de petroleo en los datos de entrada, se recorre los contiguos de la mancha actual, comprobando si 
+ alguno de ellos pertenece a un conjutno ya existente, si es asi se unen los conjuntos y se actualiza el tamaño maximo si es necesario.
+ De la misma forma, en cada caso de consulta se recorre los contiguos de la mancha actual con la funcion recorrer_contiguos, y se imprime el tamaño maximo.
+
+ El coste de recorrer los contiguos de una mancha es constante, ya que como mucho se recorreran 9 casillas, y el coste de unir dos conjuntos es log(n),
+ por lo tanto el coste total de la solucion es O(n log*(n)), siendo n los elentos de entrada.
 
  @ </answer> */
 
@@ -73,6 +77,9 @@ bool resuelveCaso() {
          cin >> casilla;
          if(casilla=='#')
          {
+            if(tam_maximo==0){
+               tam_maximo=1;
+            }
             recorrer_contiguos(i, j, f, c, manchas, representantes, tam_maximo);
          }
       }
@@ -86,6 +93,10 @@ bool resuelveCaso() {
    for (int i = 0; i < n; ++i) {
       int a, b;
       cin >> a >> b;
+      if (tam_maximo == 0)
+      {
+         tam_maximo = 1;
+      }
       recorrer_contiguos(a-1, b-1, f, c, manchas, representantes, tam_maximo);
       cout << tam_maximo << ' ';
    }
