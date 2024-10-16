@@ -1,5 +1,6 @@
 
 /*@ <authors>
+ *
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
  * TAIS009 Alex Guillermo Bonilla Taco
  * TAIS069 Santiago Ochoa de Zabalegui Velasco
@@ -13,17 +14,18 @@ using namespace std;
 #include "Digrafo.h"  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
-
-   Para resolver el problema contruimos un grafo dirigido con la plantilla Digrafo.h, dependiendo de la operacion
-   ponemos las aristas y añadimos un vertice mas para marcarnos el final. Despues creamos un objeto de la clase necronomicon que
-   recibe el grafo y hace una busqueda en profundidad para ver si hay un ciclo y si llegamos a visitar el ultimo vertice. 
-   Si llegamos al final y hay un ciclo imprimimos "A VECES", si llegamos al final y no hay ciclo imprimimos "SIEMPRE" y 
-   si no llegamos al final imprimimos "NUNCA".
-   Los vertices del grafo representan las instrucciones y las aristas representan los saltos que se pueden hacer entre instrucciones.
-
-   El coste de la solucion es O(V+A) donde V es el numero de vertices y A el numero de aristas. Ya que recorremos todos los vertices
-   y aristas del grafo en la busqueda en profundidad, y hacemos operaciones de coste constante.
-
+ 
+ Para resolver el problema contruimos un grafo dirigido con la plantilla Digrafo.h, dependiendo de la operacion
+ ponemos las aristas y añadimos un vertice mas para marcarnos el final. Despues creamos un objeto de la clase necronomicon que
+ recibe el grafo y hace una busqueda en profundidad para ver si hay un ciclo y si llegamos a visitar el ultimo vertice.
+ Si llegamos al final y hay un ciclo imprimimos "A VECES", si llegamos al final y no hay ciclo imprimimos "SIEMPRE" y
+ si no llegamos al final imprimimos "NUNCA".
+ 
+ Los vertices del grafo representan las instrucciones y las aristas representan los saltos que se pueden hacer entre instrucciones.
+ 
+ El coste de la solucion es O(V+A) donde V es el numero de vertices (instrucciones) y A el numero de aristas (saltos). Ya que recorremos todos los vertices
+ y aristas del grafo en la busqueda en profundidad, y hacemos operaciones de coste constante.
+ 
  @ </answer> */
 
 
