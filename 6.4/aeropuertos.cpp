@@ -34,15 +34,10 @@ class ARM_Kruskal
 private:
    std::vector<Arista<Valor>> _ARM;
    Valor coste;
-   bool existe_arm;
    int numero_cjtos;
-   int numero_aeropuertos;
 public:
    Valor costeARM() const {
       return coste;
-   }
-   bool existeARM()const {
-      return existe_arm;
    }
   
    int num_cjtos(){
@@ -51,9 +46,8 @@ public:
    std::vector<Arista<Valor>> const &ARM() const {
       return _ARM;
    }
-   ARM_Kruskal(GrafoValorado<Valor> const &g, int cost_ae) : coste(0),numero_aeropuertos(0),existe_arm(false)
+   ARM_Kruskal(GrafoValorado<Valor> const &g) : coste(0)
    {
-     if(g.V() == 1) existe_arm = true;
        PriorityQueue<Arista<Valor>> pq(g.aristas());
       ConjuntosDisjuntos cjtos(g.V());
       while (!pq.empty()) {
@@ -63,17 +57,13 @@ public:
          if (!cjtos.unidos(v, w)) {
             cjtos.unir(v, w);
             _ARM.push_back(a);
-            if( a.valor()<2*cost_ae)
             coste += a.valor();
-            else numero_aeropuertos+=2;
             if (_ARM.size() == g.V() - 1){
-               existe_arm=true;
                 break;
             }
          }
       }
       numero_cjtos=cjtos.num_cjtos();
-
    }
 };
 
@@ -89,10 +79,11 @@ bool resuelveCaso() {
    for (int i = 0; i < m; i++)
    {
       cin >> x >> y >> c;
+      if(c<a){  
       g.ponArista({x-1,y-1,c});
-      g.ponArista({y-1,x-1,c});
+      }
    }
-   ARM_Kruskal arm_k(g,a);
+   ARM_Kruskal arm_k(g);
    // escribir la solución
    int coste=arm_k.costeARM()+arm_k.num_cjtos()*a;
 
