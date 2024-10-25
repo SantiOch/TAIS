@@ -48,11 +48,12 @@ public:
   
   void caminoDijkstra(int ini,int fin){
     Arista<int> a;
-    list<string> cam;
+    list<int> cam;
     for (int v = fin; v != ini; v = ulti[v]) {
-      cam.push_front(to_string(v));
+      cam.push_front(v);
     }
-    distanciaDijkstra = cam.size();
+    cam.push_front(ini);
+    distanciaDijkstra = cam.size()-1;
   }
   
 private:
