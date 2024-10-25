@@ -32,7 +32,7 @@ using namespace std;
 //@ <answer>
 class Dijkstra {
 public:
-  Dijkstra(GrafoValorado<int> const &g, int orig,int fin) : origen(orig), dist(g.V(), INF), ulti(g.V()), pq(g.V()) {
+  Dijkstra(GrafoValorado<int> const &g, int orig,int fin) : origen(orig), dist(g.V(), INF), ulti(g.V()), pq(g.V()),distanciaDijkstra(INF),distanciaMasCortaBFS(INF) {
     bfs(g,orig,fin);
     if(distanciaMasCortaBFS != INF){
       dijkstra(g);
@@ -77,7 +77,6 @@ private:
   }
 
   void bfs(GrafoValorado <int> g, int ini,int fin ){
-    distanciaMasCortaBFS = INF;
     queue<int> q;
     vector<int> distancias(g.V(), INF);
     distancias[ini] = 0;
