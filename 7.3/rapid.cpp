@@ -10,10 +10,12 @@
 #include <fstream>
 #include <vector>
 #include <limits>
+#include <list>
 using namespace std;
 
  #include "GrafoValorado.h"  // propios o los de las estructuras de datos de clase
  #include "IndexPQ.h"
+ #include <queue>
 
 /*@ <answer>
 
@@ -32,9 +34,7 @@ template <typename Valor>
 class Dijkstra
 {
 public:
-   Dijkstra(GrafoValorado<Valor> const &g, int orig) : origen(orig),
-                                                         dist(g.V(), INF), ulti(g.V()), pq(g.V())
-   {
+   Dijkstra(GrafoValorado<Valor> const &g, int orig) : origen(orig), dist(g.V(), INF), ulti(g.V()), pq(g.V()) {
       dist[origen] = 0;
       pq.push(origen, 0);
       while (!pq.empty())
@@ -45,9 +45,27 @@ public:
             relajar(a);
       }
    }
-   bool hayCamino(int v) const { return dist[v] != INF; }
-   Valor distancia(int v) const { return dist[v]; }
 
+   bool hayCamino(int v) const { return dist[v] != INF; }
+   
+   Valor distancia(int v) const { return dist[v]; }
+   
+   string camino(int ini,int fin){
+      Arista<Valor> a;
+      list<string> cam;
+      for (a = ulti[fin]; a.uno() != ini; a = ulti[a.otro(a.uno())]) {
+         cam.push_front(to_string(a.uno()));
+         cam.push_front(" -> ");
+      }
+      cam.push_front(to_string(fin));
+      
+      string ret = "";
+      for(string s: cam) {
+         ret.append(s);
+      }
+
+      return ret;
+   }
 
 private:
    const Valor INF = std::numeric_limits<Valor>::max();
@@ -85,10 +103,10 @@ bool resuelveCaso() {
    cin>>k;
    for(int i=0;i<k;i++){
       cin>>ini>>fin;
-      Dijkstra<int> d(g,ini-1,fin-1);
-      if(d.hayCamino()){
+      Dijkstra<int> d(g,ini-1);
+      if(d.hayCamino(fin-1)){
          cout<<d.distancia(fin-1)<<": ";
-         cout<<d.camino()<<"\n"
+         cout<<d.camino(ini-1,fin-1)<<"\n";
       }else{
          cout<<"NO LLEGAN\n";
       }
