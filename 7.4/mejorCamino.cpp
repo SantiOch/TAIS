@@ -11,11 +11,11 @@
 #include <vector>
 #include <limits>
 #include <list>
-#include <queue>
 using namespace std;
 
 #include "GrafoValorado.h"  // propios o los de las estructuras de datos de clase
 #include "IndexPQ.h"
+#include <queue>
 
 /*@ <answer>
  
@@ -30,110 +30,108 @@ using namespace std;
 // Escribe el código completo de tu solución aquí debajo
 // ================================================================
 //@ <answer>
-class Dijkstra {
-public:
-  Dijkstra(GrafoValorado<int> const &g, int orig,int fin) : origen(orig), dist(g.V(), INF), ulti(g.V()), pq(g.V()) {
-    bfs(g,orig,fin);
-    if(distanciaMasCortaBFS != INF){
-      dijkstra(g);
-      caminoDijkstra(orig,fin);
-    }
-    
-  }
-  
-  bool hayCamino(int v) const { return dist[v] != INF; }
-  bool esCaminoMasCorto(int v) const { return distanciaMasCortaBFS ==distanciaDijkstra; }
-  
-  int distancia(int v) const { return dist[v]; }
-  
-  void caminoDijkstra(int ini,int fin){
-    Arista<int> a;
-    list<int> cam;
-    for (int v = fin; v != ini; v = ulti[v]) {
-      cam.push_front(v);
-    }
-    cam.push_front(ini);
-    distanciaDijkstra = cam.size()-1;
-  }
-  
+class MejorCamino {
 private:
-  const int INF = std::numeric_limits<int>::max();
-  int origen;
-  vector<int> dist;
-  vector<int> ulti;
-  IndexPQ<int> pq;
-  int distanciaMasCortaBFS;
-  int distanciaDijkstra;
-
-  void dijkstra(GrafoValorado<int> const &g) {
-    dist[origen] = 0;
-    pq.push(origen, 0);
-    while (!pq.empty()) {
-      int v = pq.top().elem;
-      pq.pop();
-      for (auto a : g.ady(v))
-        relajar(a, v);
+  const int INF = numeric_limits<int>::max();
+  vector<int> distanciaBFS;
+  vector<pair<int, int>> distancias;
+  GrafoValorado<int> grafo;
+  IndexPQ<pair<int, int>> pq;
+  
+  void relajar(Arista<int> calle, int interseccion) {
+    int otraInterseccion = calle.otro(interseccion);
+    if (distancias[otraInterseccion].first > distancias[interseccion].first + calle.valor()) {
+      distancias[otraInterseccion].first = distancias[interseccion].first + calle.valor();
+      distancias[otraInterseccion].second = distancias[interseccion].second + 1;
+      pq.update(otraInterseccion, distancias[otraInterseccion]);
+    }
+    else if (distancias[otraInterseccion].first == distancias[interseccion].first + calle.valor() &&
+             distancias[otraInterseccion].second > distancias[interseccion].second + 1) {
+      distancias[otraInterseccion].second = distancias[interseccion].second + 1;
+      pq.update(otraInterseccion, distancias[otraInterseccion]);
     }
   }
-
-  void bfs(GrafoValorado <int> g, int ini,int fin ){
-    distanciaMasCortaBFS = INF;
-    queue<int> q;
-    vector<int> distancias(g.V(), INF);
-    distancias[ini] = 0;
-    q.push(ini);
-    while (!q.empty()) {
-      int v = q.front(); q.pop();
-      for (Arista<int> a : g.ady(v)) {
-        int w = a.otro(v);
-        if (distancias[w] == INF) {
-          distancias[w] = distancias[v] + 1;
-          q.push(w);
+  
+  void Dijkstra(int origen) {
+    distancias[origen] = {0, 0};
+    pq.push(origen, {0, 0});
+    while (!pq.empty()) {
+      int interseccion = pq.top().elem;
+      pq.pop();
+      for (auto calle : grafo.ady(interseccion))
+        relajar(calle, interseccion);
+    }
+  }
+  
+  void bfs(int origen) {
+    distanciaBFS[origen] = 0;
+    queue<int> cola;
+    cola.push(origen);
+    while (!cola.empty()) {
+      int interseccion = cola.front();
+      cola.pop();
+      for (auto calle : grafo.ady(interseccion)) {
+        int otraInterseccion = calle.otro(interseccion);
+        if (distanciaBFS[otraInterseccion] == INF) {
+          distanciaBFS[otraInterseccion] = distanciaBFS[interseccion] + 1;
+          cola.push(otraInterseccion);
         }
       }
     }
-    distanciaMasCortaBFS = distancias[fin];
   }
-  void relajar(Arista<int> a, int v) {
-    int w = a.otro(v);
-    if (dist[w] > dist[v] + a.valor()) {
-      dist[w] = dist[v] + a.valor();
-      ulti[w] = v;
-      pq.update(w, dist[w]);
-    }
+  
+public:
+  bool hayCamino(int destino) {
+    return distanciaBFS[destino] != INF;
+  }
+  
+  int distancia(int destino) {
+    return distancias[destino].first;
+  }
+  
+  bool esMejorDistancia(int destino) {
+    return distancias[destino].second == distanciaBFS[destino];
+  }
+  
+  MejorCamino(GrafoValorado<int> grafo, int n, int origen) : grafo(0), distanciaBFS(n, INF), pq(n), distancias(n, {INF, 0}) {
+    this->grafo = grafo;
+    bfs(origen);
+    Dijkstra(origen);
   }
 };
+
 bool resuelveCaso() {
-  
   // leer los datos de la entrada
-  int n,c,k,ini,fin;
-  cin>>n>>c;
-  if (!std::cin)  // fin de la entrada
+  int numIntersecciones, numCalles;
+  cin >> numIntersecciones >> numCalles;
+  if (!cin)  // fin de la entrada
     return false;
-  GrafoValorado<int> g(n);
-  int a, b, v;
-  for(int i=0;i<c;i++){
-    cin >> a >> b >>v;
-    g.ponArista({a-1,b-1,v});
+  int interseccion1, interseccion2, longitud;
+  GrafoValorado<int> ciudad(numIntersecciones);
+  for (int i = 0; i < numCalles; ++i) {
+    cin >> interseccion1 >> interseccion2 >> longitud;
+    ciudad.ponArista({ interseccion1 - 1, interseccion2 - 1, longitud });
   }
   
-  // resolver el caso posiblemente llamando a otras funciones
-  // escribir la solución
-  cin>>k;
-  for(int i=0;i<k;i++){
-    cin>>ini>>fin;
-    Dijkstra d(g, ini - 1,fin -1);
-    if(d.hayCamino(fin - 1)){
-      cout<<d.distancia(fin - 1)<<" ";
-      if(d.esCaminoMasCorto(fin - 1))
-        cout<<"SI\n";
-      else
-        cout<<"NO\n";
-    }else{
-      cout<<"SIN CAMINO\n";
+  int numConsultas;
+  cin >> numConsultas;
+  while (numConsultas != 0) {
+    int origen, destino;
+    cin >> origen >> destino;
+    MejorCamino camino(ciudad, numIntersecciones, origen - 1);
+    if (camino.hayCamino(destino - 1)) {
+      cout << camino.distancia(destino - 1) << " ";
+      if (camino.esMejorDistancia(destino - 1)) {
+        cout << "SI\n";
+      } else {
+        cout << "NO\n";
+      }
+    } else {
+      cout << "SIN CAMINO\n";
     }
-    
+    numConsultas--;
   }
+  
   cout << "---\n";
   return true;
 }
