@@ -57,9 +57,7 @@ private:
   }
   
   void dijkstra(vector<int> origenes) {
-    dist = vector<int>(grafo.V(), INF);
     for(int origen: origenes) {
-      if (!visitados.count(origen)) visitados.insert(origen);
       dist[origen] = 0;
       pq.push(origen, 0);
     }
