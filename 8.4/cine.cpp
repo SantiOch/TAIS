@@ -14,8 +14,6 @@
 using namespace std;
 
 class Peli {
-
-  
 public:
   
   int horaEnMinutos;
@@ -66,7 +64,7 @@ bool resuelveCaso() {
     cin >> duracion;
 
     int hora = stoi(horaEnString.substr(0, 2));
-    int minuto = stoi(horaEnString.substr(3, 2));  // Corregido a 2 caracteres
+    int minuto = stoi(horaEnString.substr(3, 2));
 
     peliculas[i] = {hora, minuto, duracion};
   }
