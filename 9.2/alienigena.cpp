@@ -9,8 +9,9 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 using namespace std;
-#include "ConjuntosDisjuntos.h"  // propios o los de las estructuras de datos de clase
+// #include "ConjuntosDisjuntos.h"  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
 
@@ -25,48 +26,53 @@ using namespace std;
 // Escribe el código completo de tu solución aquí debajo
 // ================================================================
 //@ <answer>
+int resolver(vector<pair<int,int>> const& trabajo, int C, int F, bool& imposible) {
+   int total = 0, inicio = C, i = 0;
+   while (inicio < F && !imposible){
+      int aux = inicio;
+      while (i < trabajo.size() && trabajo[i].first <= inicio){
+         if (trabajo[i].second > aux)
+            aux = trabajo[i].second;
+         i++;
+      }
+      if (aux > inicio){
+         total++;
+         inicio = aux;
+      }
+      else
+         imposible = true;
+   }
 
+   return total;
+}
 bool resuelveCaso() {
 
    // leer los datos de la entrada
-   int C,F,N;
-   cin >>C>>F>>N;
+   int C, F, N;
+   cin >> C >> F >> N;
    if (C == 0 && F == 0 && N == 0)
       return false;
 
-
    // resolver el caso posiblemente llamando a otras funciones
-   ConjuntosDisjuntos intervalo(F-C);
+   vector<pair<int, int>> trabajos(N); 
    int c, f;
    for (int i = 0; i < N; i++)
    {
-      cin>>c>>f;
-      if(c<C)c=0;
-      else c=c-C;
-      if(f>F)f=F-C;
-      else f=f-C;
-      if(!intervalo.unidos(c,f-1))
-         intervalo.unir(c,f-1);
+      cin >> c >> f;
+      trabajos[i].second = f;
+      trabajos[i].first = c; 
    }
-   
+   sort(trabajos.begin(), trabajos.end());
+
+   bool imposible = false;
+   // resolver el caso posiblemente llamando a otras funciones
+   int sol = resolver(trabajos, C, F, imposible);
+
    // escribir la solución
-
-   bool encontrado = false, descartado = false;
-   int i = 0,cont=0;
-   while (!encontrado && !descartado)
-   {
-      int j = intervalo.buscar(i);
-      if (j == i && j != F - C)
-         descartado = true;
-      else if (j == F - C)
-         encontrado = true;
-      else
-         i = j + 1;
-
-      cont++;
-   }
-   if(encontrado)cout<<cont<<"\n";
-   else cout<<"IMPOSIBLE\n";
+   if (!imposible)
+      cout << sol << "\n";
+   else
+      cout << "Imposible\n";
    return true;
 }
 
