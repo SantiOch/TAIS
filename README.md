@@ -9,7 +9,7 @@ These were the problems we had to solve on the online judge, lab sessions, and e
 
 There are `12` different themes we learned in this subject, and they are organized by the number on the judge following this pattern:
 
-**There are 2 numbers:**
+**There are 2 numbers on each problem:**
 - The first number corresponds to the theme [(see the different content down below)](#subject-content)
 - The second number means just the order in the judge; if there is a 6.1, for example, the 1 just means it was the first one to appear on the judge.
 
