@@ -84,20 +84,20 @@ The `.txt` file contains the test cases for each problem; normally, these are th
 
 ## Online judge number information:
 
-| Number |                Section                 |               Total exercises                | Lab/Exam |                                Content                                |
-| :----- | :------------------------------------- | :------------------------------------------- | :------- | :-------------------------------------------------------------------- |
-|   1    |    [1](#theme-1)                       |        2 [(See)](/Ejercicios%20Juez/1)       |   N/A    |     AVL trees                                                         |
-|   2    |    [2](#theme-2)                       |        6 [(See)](/Ejercicios%20Juez/2)       |   LAB    |     Priority queues                                                   |
-|   3    |    [2](#theme-2)                       |        4 [(See)](/Ejercicios%20Juez/3)       |   LAB    |     Indexed priority queues                                           |
-|   4    |    [3](#theme-3)                       |        7 [(See)](/Ejercicios%20Juez/4)       |   LAB    |     Graphs                                                            |
-|   5    |    [3](#theme-3)                       |        5 [(See)](/Ejercicios%20Juez/5)       |   LAB    |     Directed graphs                                                   |
-|   6    |    [3](#theme-3), [4](#theme-4)        |        5 [(See)](/Ejercicios%20Juez/6)       |   EXAM   |     Weighted graphs, disjoint sets, and Kruskal                       |
-|   7    |    [3](#theme-3)                       |        6 [(See)](/Ejercicios%20Juez/7)       |   LAB    |     Weighted directed graphs and Dijkstra                             |
-|   8    |    [6](#theme-6)                       |        5 [(See)](/Ejercicios%20Juez/8)       |   LAB    |     Greedy algorithms                                                 |
-|   9    |    [6](#theme-6)                       |        5 [(See)](/Ejercicios%20Juez/9)       |   LAB    |     Greedy algorithms over minimization and maximization problems     |
-|   10   |    [1](#theme-1)                       |                                              |   LAB    |                                                                       |
-|   11   |    [1](#theme-1)                       |                                              |   LAB    |                                                                       |
-|   12   |    [1](#theme-1)                       |                                              |   LAB    |                                                                       |
+| Number |                Section                 |                   Total exercises                   | Lab/Exam |                                Content                                |
+| :----- | :------------------------------------- | :-------------------------------------------------- | :------- | :-------------------------------------------------------------------- |
+|   1    |    [1](#theme-1)                       |        2 [(See)](/Ejercicios%20Juez/Week%201)       |   N/A    |     AVL trees                                                         |
+|   2    |    [2](#theme-2)                       |        6 [(See)](/Ejercicios%20Juez/Week%202)       |   LAB    |     Priority queues                                                   |
+|   3    |    [2](#theme-2)                       |        4 [(See)](/Ejercicios%20Juez/Week%203)       |   LAB    |     Indexed priority queues                                           |
+|   4    |    [3](#theme-3)                       |        7 [(See)](/Ejercicios%20Juez/Week%204)       |   LAB    |     Graphs                                                            |
+|   5    |    [3](#theme-3)                       |        5 [(See)](/Ejercicios%20Juez/Week%205)       |   LAB    |     Directed graphs                                                   |
+|   6    |    [3](#theme-3), [4](#theme-4)        |        5 [(See)](/Ejercicios%20Juez/Week%206)       |   EXAM   |     Weighted graphs, disjoint sets, and Kruskal                       |
+|   7    |    [3](#theme-3)                       |        6 [(See)](/Ejercicios%20Juez/Week%207)       |   LAB    |     Weighted directed graphs and Dijkstra                             |
+|   8    |    [6](#theme-6)                       |        5 [(See)](/Ejercicios%20Juez/Week%208)       |   LAB    |     Greedy algorithms                                                 |
+|   9    |    [6](#theme-6)                       |        5 [(See)](/Ejercicios%20Juez/Week%209)       |   LAB    |     Greedy algorithms over minimization and maximization problems     |
+|   10   |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
+|   11   |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
+|   12   |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
 
 
 ## License
