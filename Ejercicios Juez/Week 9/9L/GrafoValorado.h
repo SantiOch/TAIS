@@ -80,7 +80,7 @@ public:
       flujo >> E;
       while (E--) {
          flujo >> v >> w >> c;
-         ponArista({v - primer, w - primer, c});
+         ponArista({v - primer, w - primer, c*2});
       }
    }
 
