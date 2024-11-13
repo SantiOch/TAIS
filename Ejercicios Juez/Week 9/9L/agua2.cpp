@@ -39,10 +39,9 @@ private:
   vector<int> distanciasI;
   vector<Arista<int>> ulti;
   GrafoValorado<int> grafo;
-  GrafoValorado<int> grafoI;
   IndexPQ<int> pq;
   bool haySolucion;
-  int minimoCoste;
+  long long int minimoCoste;
   void relajar(Arista<int> a,int v, vector<int>&dist)
   {
       int w = a.otro(v);
@@ -69,7 +68,7 @@ private:
 public:
    bool hayCamino(){return haySolucion;}
    int camino(){return minimoCoste;};
-   camiones_reparto(GrafoValorado<int> g):grafo(0),grafoI(0), distancias(g.V(),INF),distanciasI(g.V(),INF),pq(g.V()),ulti(g.V()),haySolucion(true),minimoCoste(0){
+   camiones_reparto(GrafoValorado<int> g):grafo(0),distancias(g.V(),INF),distanciasI(g.V(),INF),pq(g.V()),ulti(g.V()),haySolucion(true),minimoCoste(0){
       this->grafo=g;
       dijkstra(0,distancias,grafo);
       dijkstra(g.V()-1,distanciasI,grafo);
