@@ -10,7 +10,8 @@
 #include <fstream>
 using namespace std;
 
-// #include "..."  // propios o los de las estructuras de datos de clase
+//  #include "../../../Plantillas Juez/teoria/EnterosInf.h"  // descomentar para local
+//  #include "EnterosInf.h"  // descomentar para juez
 
 /*@ <answer>
 
