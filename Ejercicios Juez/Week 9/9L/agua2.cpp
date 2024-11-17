@@ -24,9 +24,9 @@ using namespace std;
  @ </answer> */
  
 struct Nodo {
-  int distN;
-  int distS;
-  int diferencia;
+  long long int distN;
+  long long int distS;
+  long long int diferencia;
   bool operator<(const Nodo b)const {
     return diferencia<b.diferencia;
   }
@@ -34,15 +34,15 @@ struct Nodo {
 class camiones_reparto
 {
 private:
-  const int INF = numeric_limits<int>::max();
-  vector<int> distancias;
-  vector<int> distanciasI;
+  const long long int INF = numeric_limits<long long int>::max();
+  vector<long long int> distancias;
+  vector<long long int> distanciasI;
   vector<Arista<int>> ulti;
   GrafoValorado<int> grafo;
-  IndexPQ<int> pq;
+  IndexPQ<long long int> pq;
   bool haySolucion;
   long long int minimoCoste;
-  void relajar(Arista<int> a,int v, vector<int>&dist)
+  void relajar(Arista<int> a,int v, vector<long long int>&dist)
   {
       int w = a.otro(v);
      if (dist[w] > dist[v] + a.valor())
@@ -53,7 +53,7 @@ private:
      }
   };
   
-   void dijkstra(int origen,vector<int>&dist,GrafoValorado<int>& g) 
+   void dijkstra(int origen,vector<long long int>&dist,GrafoValorado<int>& g) 
    {
       dist[origen] = 0;
       pq.push(origen, 0);
