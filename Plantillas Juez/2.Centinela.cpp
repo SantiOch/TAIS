@@ -10,9 +10,12 @@
 #include <fstream>
 using namespace std;
 
-//  #include "../../../Plantillas Juez/teoria/EnterosInf.h"  // descomentar para local
-//  #include "EnterosInf.h"  // descomentar para juez
-
+#ifndef DOMJUDGE
+   //  #include "../../../Plantillas Juez/teoria/EnterosInf.h"  // descomentar para local
+#endif
+#ifdef DOMJUDGE
+   // #include "EnterosInf.h" // descomentar para juez
+#endif
 /*@ <answer>
 
  Escribe aquí un comentario general sobre la solución, explicando cómo
