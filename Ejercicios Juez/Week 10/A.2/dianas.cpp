@@ -12,43 +12,51 @@
 #include <algorithm>
 using namespace std;
 
-//  #include "../../../Plantillas Juez/teoria/EnterosInf.h"  // descomentar para local
- #include "EnterosInf.h"  // descomentar para juez
+#ifndef DOMJUDGE
+    #include "../../../Plantillas Juez/teoria/EnterosInf.h"  // descomentar para local
+#endif
+#ifdef DOMJUDGE
+   #include "EnterosInf.h" // descomentar para juez
+#endif
+   /*@ <answer>
 
-/*@ <answer>
+    Escribe aquí un comentario general sobre la solución, explicando cómo
+    se resuelve el problema y cuál es el coste de la solución, en función
+    del tamaño del problema.
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+    @ </answer> */
 
- @ </answer> */
+   // ================================================================
+   // Escribe el código completo de tu solución aquí debajo
+   // ================================================================
+   //@ <answer>
+   vector<int> num_dardos(const vector<int> &puntuaciones, int n, int s)
+   {
+      vector<EntInf> v(s + 1, Infinito);
+      vector<int> sol;
+      v[0] = 0;
 
-
-// ================================================================
-// Escribe el código completo de tu solución aquí debajo
-// ================================================================
-//@ <answer>
-vector<int> num_dardos(const vector<int>& puntuaciones,int n, int s) {
-	vector<EntInf> v(s+1, Infinito);
-	vector<int>sol;
-	v[0] = 0;
-	
-	for (int i = 1; i <= n; i++) {
-		for (int j = puntuaciones[i]; j <= s; j = j+ 1) {
-			v[j] = min(v[j], v[j - puntuaciones[i]] + 1);
-		}
-	}
-	if (v[s] != Infinito) {
-		int j = s;
-		for (int i = n; i > 0; i--) {
-			if (j - puntuaciones[i] >= 0 && v[j] == v[j - puntuaciones[i]] + 1) {
-				sol.push_back(puntuaciones[i]);
-				j -= puntuaciones[i];
-				i++;
-			}
-		}
-	}
-	return sol;
+      for (int i = 1; i <= n; i++)
+      {
+         for (int j = puntuaciones[i]; j <= s; j = j + 1)
+         {
+            v[j] = min(v[j], v[j - puntuaciones[i]] + 1);
+         }
+      }
+      if (v[s] != Infinito)
+      {
+         int j = s;
+         for (int i = n; i > 0; i--)
+         {
+            if (j - puntuaciones[i] >= 0 && v[j] == v[j - puntuaciones[i]] + 1)
+            {
+               sol.push_back(puntuaciones[i]);
+               j -= puntuaciones[i];
+               i++;
+            }
+         }
+      }
+      return sol;
 }
 
 bool resuelveCaso() {
