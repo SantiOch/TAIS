@@ -96,8 +96,8 @@ The `.txt` file contains the test cases for each problem; normally, these are th
 |   8    |    [6](#theme-6)                       |        5 [(See)](/Ejercicios%20Juez/Week%208)       |   LAB    |     Greedy algorithms                                                 |
 |   9    |    [6](#theme-6)                       |        5 [(See)](/Ejercicios%20Juez/Week%209)       |   LAB    |     Greedy algorithms over minimization and maximization problems     |
 |   A    |    [7](#theme-7)                       |        5 [(See)](/Ejercicios%20Juez/Week%2010)      |   LAB    |     Dynamic programming                                               |
-|   11   |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
-|   12   |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
+|   B    |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
+|   C    |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
 
 
 ## License
