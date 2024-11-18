@@ -13,8 +13,12 @@
 #include <limits>
 using namespace std;
 
- #include "../../../Plantillas Juez/teoria/EnterosInf.h"  // descomentar para local
-//  #include "EnterosInf.h"  // descomentar para juez
+#ifndef DOMJUDGE
+    #include "../../../Plantillas Juez/teoria/EnterosInf.h"  // descomentar para local
+#endif
+#ifdef DOMJUDGE
+   #include "EnterosInf.h" // descomentar para juez
+#endif//  #include "EnterosInf.h"  // descomentar para juez
 
 /*@ <answer>
 
