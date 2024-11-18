@@ -95,7 +95,7 @@ The `.txt` file contains the test cases for each problem; normally, these are th
 |   7    |    [3](#theme-3)                       |        6 [(See)](/Ejercicios%20Juez/Week%207)       |   LAB    |     Weighted directed graphs and Dijkstra                             |
 |   8    |    [6](#theme-6)                       |        5 [(See)](/Ejercicios%20Juez/Week%208)       |   LAB    |     Greedy algorithms                                                 |
 |   9    |    [6](#theme-6)                       |        5 [(See)](/Ejercicios%20Juez/Week%209)       |   LAB    |     Greedy algorithms over minimization and maximization problems     |
-|   10   |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
+|   A    |    [7](#theme-7)                       |        5 [(See)](/Ejercicios%20Juez/Week%2010)      |   LAB    |     Dynamic programming                                               |
 |   11   |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
 |   12   |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
 
