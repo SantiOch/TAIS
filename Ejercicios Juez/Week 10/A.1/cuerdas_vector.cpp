@@ -70,7 +70,7 @@ tuple<bool, long long int,long long int,long long int> calcularCuerdas(vector<tC
          costes[j] = min(costes[j], costes[j - cuerdas[i].longitud] + cuerdas[i].coste);
       }
 	}
-   return {formas[L] != 0 ? true : false, formas[L], cantidades[L], costes[L]};
+   return {formas[L] != 0, formas[L], cantidades[L], costes[L]};
 }
 bool resuelveCaso() {
 
