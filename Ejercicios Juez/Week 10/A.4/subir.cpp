@@ -21,9 +21,9 @@ using namespace std;
 #endif
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+juego(0, j) = 0
+juego(i, j) = 0 si j > N
+juego(i, j) = { tablero[i][j] + max(juego(i-1, j-1), juego(i-1, j), juego(i-1, j+1)} si 1 <= i, j <= N
 
  @ </answer> */
 

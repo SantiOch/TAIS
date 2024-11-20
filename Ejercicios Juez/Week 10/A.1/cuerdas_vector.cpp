@@ -22,9 +22,24 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+j es la longitud cubierta
+i representa el conjunto de cuerdas desde el 1 hasta el i
+
+
+formas(0, j) = 0 con j > 0
+formas(i, 0) = 1
+formas(i, j)  = | formas(i - 1, j) cuerdas[i].l > j
+			       | formas(i - 1, j) + formas(i - 1, j - cuerdas[i].l)
+
+cantidades(0, j) = INF j > 0
+cantidades(i, 0) = 0
+cantidades(i, j)  = | cantidades(i - 1, j) cuerdas[i].l > j
+		              | min(cantidades(i - 1, j), cantidades(i - 1, j - cuerdas[i].l) + 1)
+
+coste(0, j) = INF con j > 0
+coste(i, 0) = 0
+coste(i, j) = | coste(i-1, j) cuerdas[i].l > j
+			     | min(coste(i-1, j), coste(i-1, j-cuerdas[i].l) + cuerdas[i].c)
 
  @ </answer> */
 

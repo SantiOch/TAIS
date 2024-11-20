@@ -19,11 +19,13 @@ using namespace std;
    #include "EnterosInf.h" // descomentar para juez
 #endif
    /*@ <answer>
+	j representa la puntuación a obtener
+	i representa el conjunto de las puntuaciones de 1 a i
 
-    Escribe aquí un comentario general sobre la solución, explicando cómo
-    se resuelve el problema y cuál es el coste de la solución, en función
-    del tamaño del problema.
-
+	num_dardos(0, j) = INF con j > 0
+	num_dardos(i, 0) = 0
+	num_dardos(i, j) = | num_dardos(i-1, j) si puntuaciones[i] > j
+				          | min(num_dardos(i-1, j), num_dardos(i, j - puntuaciones[i]) + 1)
     @ </answer> */
 
    // ================================================================
