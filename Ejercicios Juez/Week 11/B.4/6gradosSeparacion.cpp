@@ -23,9 +23,19 @@ using namespace std;
 #endif
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+   Problema de Floyd-Warshall. Dado un grafo no dirigido, se pide encontrar el máximo grado de separación entre dos nodos.
+   Para ello, se aplica el algoritmo de Floyd-Warshall para encontrar la distancia mínima entre todos los nodos.
+   Si algún nodo no está conectado con otro, se devuelve Infinito. En caso contrario, se devuelve el máximo valor de la matriz.
+   Complejidad O(n^3) donde n es el número de nodos.
+
+   Recurrencia:
+   matriz[i][j] = min(matriz[i][j], matriz[i][k] + matriz[k][j]) para todo k en [0, n)
+   donde matriz[i][j] es la distancia mínima entre los nodos i y j.
+   
+   Casos base:
+   matriz[i][i] = 0 para todo i en [0, n)
+   matriz[i][j] = Infinito si no hay conexión entre los nodos i y j.
+   
 
  @ </answer> */
 
