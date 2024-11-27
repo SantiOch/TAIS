@@ -17,7 +17,6 @@ int comidaMaxima(const vector<int>& cubos, int i, int j, Matriz<int>& dp) {
         res = cubos[i];
     }
     else {
-        // Selecci�n del mejor valor m�ximo entre las posibles opciones
         int x1,x2,y1,y2;
         if(cubos[i+1]>cubos[j]){
             x1 = i+2;
@@ -58,7 +57,6 @@ bool resuelveCaso() {
 
     Matriz<int> dp(N+1, N+1, -1);
 
-    // Llamar a la funci�n para calcular la cantidad m�xima que puede comer la vaca
     cout << comidaMaxima(cubos, 0, N-1 , dp) << "\n";
 
     return true;
