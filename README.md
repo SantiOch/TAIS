@@ -62,10 +62,10 @@ The `.txt` file contains the test cases for each problem; normally, these are th
   - Greedy algorithms used in maximization and minimization problems.
 
 <a name="theme-7"></a>
-### 7: Dynamic programming (_TODO, todavía no hemos llegado_)
+### 7: Dynamic programming (_A, B, C on the judge_)
   - Dynamic programming and whether it is optimal or not
   - Coin change problem
-	- Full backpack problem 
+	- Full backpack problem
 	- Floyd's algorithm
 	- Dynamic programming in sequence problems
 	- Chainied matrix multiplication problem using dynamic programming 
