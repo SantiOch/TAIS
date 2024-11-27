@@ -62,9 +62,14 @@ The `.txt` file contains the test cases for each problem; normally, these are th
   - Greedy algorithms used in maximization and minimization problems.
 
 <a name="theme-7"></a>
-### 7: Dynamic programming (_TODO, todavía no hemos llegado_)
-  - TODO
-  - TODO
+### 7: Dynamic programming (_A, B, C on the judge_)
+  - Dynamic programming and whether it is optimal or not
+  - Coin change problem
+	- Full backpack problem
+	- Floyd's algorithm
+	- Dynamic programming in sequence problems
+	- Chainied matrix multiplication problem using dynamic programming 
+	- Justified text problem
 
 <a name="theme-8"></a>
 ### 8: Brach and bound (_TODO, todavía no hemos llegado_)
@@ -96,8 +101,8 @@ The `.txt` file contains the test cases for each problem; normally, these are th
 |   8    |    [6](#theme-6)                       |        5 [(See)](/Ejercicios%20Juez/Week%208)       |   LAB    |     Greedy algorithms                                                 |
 |   9    |    [6](#theme-6)                       |        5 [(See)](/Ejercicios%20Juez/Week%209)       |   LAB    |     Greedy algorithms over minimization and maximization problems     |
 |   A    |    [7](#theme-7)                       |        5 [(See)](/Ejercicios%20Juez/Week%2010)      |   LAB    |     Dynamic programming                                               |
-|   B    |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
-|   C    |    [1](#theme-1)                       |                                                     |   LAB    |                                                                       |
+|   B    |    [7](#theme-7)                       |        5 [(See)](/Ejercicios%20Juez/Week%2011)      |   LAB    |     Dynamic programming                                               |
+|   C    |    [7](#theme-7)                       |        5 [(See)](/Ejercicios%20Juez/Week%2012)      |   LAB    |     Dynamic programming                                               |
 
 
 ## License
