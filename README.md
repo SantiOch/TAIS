@@ -65,7 +65,7 @@ The `.txt` file contains the test cases for each problem; normally, these are th
 ### 7: Dynamic programming (_TODO, todavía no hemos llegado_)
   - Dynamic programming and whether it is optimal or not
   - Coin change problem
-	- Full backpack problem
+	- Full backpack problem 
 	- Floyd's algorithm
 	- Dynamic programming in sequence problems
 	- Chainied matrix multiplication problem using dynamic programming 
