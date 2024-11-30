@@ -40,24 +40,18 @@ const int INF = INT_MAX - 100000;
 
 int divi(int N, int P, const vector<int>& v, const vector<int>& c) {
   
-  Matriz<int> sol(N + 1, P + 1, INF);
+  vector<int> sol(P + 1, INF);
+  sol[0] = 0;
   
-  for (int i = 0; i <= N; i++) {
-    sol[i][0] = 0;
-  }
-  
-  for (int i = 1; i <= N; i++) {
-    for (int j = 1; j <= P; j++) {
-      for (int k = 0; k <= min(c[i - 1], j / v[i - 1]); k++) {
-        int restante = j - k * v[i - 1];
-        if (restante >= 0) {
-          sol[i][j] = min(sol[i][j], k + sol[i - 1][restante]);
-        }
+  for (int i = 0; i < N; i++) {
+    for (int j = P; j >= 0; j--) {
+      for (int k = 0; k <= c[i] && k * v[i] <= j; k++) {
+        sol[j] = min(sol[j], sol[j - k * v[i]] + k);
       }
     }
   }
   
-  return sol[N][P];
+  return sol[P];
 }
 
 bool resuelveCaso() {
@@ -67,19 +61,15 @@ bool resuelveCaso() {
   
   if(!cin) return false;
   
-  vector<int> v1;
-  vector<int> v2;
+  vector<int> v1(n);
+  vector<int> v2(n);
   
   for (int i = 0; i < n; i++) {
-    int num;
-    cin >> num;
-    v1.push_back(num);
+    cin >> v1[i];
   }
   
   for (int i = 0; i < n; i++) {
-    int num;
-    cin >> num;
-    v2.push_back(num);
+    cin >> v2[i];
   }
   
   int p;
