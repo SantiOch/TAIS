@@ -43,18 +43,18 @@ int calcularIndice(char c) {
     default:  return 4;
   }
 }
-int adn(int n, int m, string s1, string s2, Matriz<int> punt) {
+
+int adn(int n, int m, string s1, string s2, const Matriz<int>& punt) {
   Matriz<int> sol(n + 1, m + 1, 0);
   
-  // Inicialización de los bordes
   for (int i = 1; i <= n; i++) {
     sol[i][0] = punt[calcularIndice(s1[i - 1])][4] + sol[i - 1][0];
   }
+  
   for (int j = 1; j <= m; j++) {
     sol[0][j] = punt[4][calcularIndice(s2[j - 1])] + sol[0][j - 1];
   }
   
-  // Cálculo del resto de la matriz
   for (int i = 1; i <= n; i++) {
     for (int j = 1; j <= m; j++) {
       int indiceI = calcularIndice(s1[i - 1]);
@@ -72,6 +72,7 @@ int adn(int n, int m, string s1, string s2, Matriz<int> punt) {
   
   return sol[n][m];
 }
+
 void resuelveCaso() {
   
   Matriz<int> punt(5,5,0);
