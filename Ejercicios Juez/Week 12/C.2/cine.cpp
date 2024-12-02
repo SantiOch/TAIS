@@ -52,7 +52,6 @@ int cine(Matriz<EntInf>&matriz,const vector<tPeli>&peliculas,int n){
    for (int i = 1; i < n+1; i++)
    {
       matriz[i][0] = 0;
-
       for (int j = 1; j < n+1; j++)
       {
          
