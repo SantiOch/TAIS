@@ -2,13 +2,13 @@
 /*@ <authors>
  *
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
- * TAIS009 Alex Guillermo Bonilla Taco 
- * TAIS069 Santiago Ochoa de Zabalegui Velasco 
+ * TAIS009 Alex Guillermo Bonilla Taco
+ * TAIS069 Santiago Ochoa de Zabalegui Velasco
  *@ </authors> */
 
 #include <iostream>
 #include <fstream>
-#include <vector>
+#include <utility>
 #include <algorithm>
 using namespace std;
 
@@ -21,91 +21,103 @@ using namespace std;
    #include "Matriz.h" // descomentar para juez
 #endif
 /*@ <answer>
-
-   cine(i) = maximos minutos de peliculas que Dinamique podra ver en la maraton de cine
-             considerando las peliculas de 0..i
-   *Casos base:
-      cine(0)=0;
-   *Recurrencia:
-   cine(i)= |cine(i-1)+ duracion(i) si ultimaDuracion < horaInici(i)
-            |max(cine(i-x) + duracion(i), cine(i-1)) si i > 0
-
+ 
+ El problema se resuelve con programacion dinamica de forma recursiva, N es el numero de peliculas.
+ Siendo siendo i el indice de la pelicula actual y j el indice de la ultima pelicula.
+ 
+ *Definicion
+  Pelis(i, j) es el maximo de peliculas que se pueden ver si se empieza en la pelicula i y se termina en la pelicula j
+ 
+ *Caso base
+   Pelis(i,j) = 0 si i > j
+ *Caso recursivo
+   Pelis(i, j) = max(Pelis(i + 1, j), duracion(i) + Pelis(k, j)) donde k es el primer indice tal que fin(i) <= ini(k))
+ 
  @ </answer> */
-
 
 // ================================================================
 // Escribe el código completo de tu solución aquí debajo
 // ================================================================
+
 //@ <answer>
-struct tPeli
-{
-   int inicio;
-   int duracion;
-   bool operator<(const tPeli&o)const{
-      return inicio < o.inicio;
-   }
+
+struct Pelicula {
+  int ini;
+  int dur;
+  int fin;
+  
+  Pelicula(int ini, int dur) : ini(ini), dur(dur), fin(ini + dur + 10) { }
+  
+  bool operator<(const Pelicula& otro) const {
+    return ini == otro.ini ? fin < otro.fin : ini < otro.ini;
+  }
 };
 
-int cine(Matriz<EntInf>&matriz,const vector<tPeli>&peliculas,int n){
-   int total=0;
-   matriz[0][0]=0;
-   for (int i = 1; i < n+1; i++)
-   {
-      matriz[i][0] = 0;
-      for (int j = 1; j < n+1; j++)
-      {
-         
-      }
-      
-      
-   }
-   
-   return total;
-}
-bool resuelveCaso() {
+int pelis(int i, int j, const vector<Pelicula>& v, Matriz<int>& m) {
 
-   // leer los datos de la entrada
-   int n;
-   cin>>n;
-   if (n==0)
-      return false;
-   Matriz<EntInf>matriz(n+1,-1);
-   vector<tPeli>peliculas(n);
-      char c;
-      int hora,minutos,duracion;
-   for (int i = 0; i < n; i++)
-   {
-      cin >> hora;
-      cin>>c;
-      cin >>minutos;
-      peliculas[i].inicio = hora * 60 + minutos;
-      cin >> peliculas[i].duracion;
-   }
-   
-   // resolver el caso posiblemente llamando a otras funciones
-   int sol = cine(matriz,peliculas,n);
-   // escribir la solución
-   cout << sol << "\n;";
-   
-    return true;
+  if (m[i][j] != -1) return m[i][j];
+  
+  if (i > j) {
+    m[i][j] = 0;
+    return 0;
+  }
+  
+  int& res = m[i][j];
+  
+  int k = i + 1;
+  
+  while (k <= j && !(v[i].fin <= v[k].ini)) { k++; }
+  
+  res = max(pelis(i + 1, j, v, m), v[i].dur + pelis(k, j, v, m));
+  
+  return res;
 }
+
+bool resuelveCaso() {
+  
+  int N;
+  cin >> N;
+  if (N == 0) return false;
+  
+  vector<Pelicula> peliculas;
+  
+  for (int i = 0; i < N; ++i) {
+
+    string horaEnString;
+    cin >> horaEnString;
+    int duracion;
+    cin >> duracion;
+
+    int hora = stoi(horaEnString.substr(0, 2));
+    int minuto = stoi(horaEnString.substr(3, 2));
+    
+    int ini = hora * 60 + minuto;
+
+    peliculas.push_back({ini, duracion});
+  }
+  
+  Matriz<int> m(N + 1, N + 1, -1);
+  
+  sort(peliculas.begin(), peliculas.end());
+  
+  cout << pelis(0, N - 1, peliculas, m) << "\n";
+  
+  return true;
+}
+
 
 //@ </answer>
 //  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
-
 int main() {
-   // ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
-   std::ifstream in("casos.txt");
-   auto cinbuf = std::cin.rdbuf(in.rdbuf());
+  std::ifstream in("casos.txt");
+  auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
-
-   while (resuelveCaso());
-
-   // para dejar todo como estaba al principio
+  
+  while(resuelveCaso());
+  
 #ifndef DOMJUDGE
-   std::cin.rdbuf(cinbuf);
-   system("PAUSE");
+  std::cin.rdbuf(cinbuf);
 #endif
-   return 0;
+  return 0;
 }
