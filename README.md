@@ -65,11 +65,11 @@ The `.txt` file contains the test cases for each problem; normally, these are th
 ### 7: Dynamic programming (_A, B, C on the judge_)
   - Dynamic programming and whether it is optimal or not
   - Coin change problem
-	- Full backpack problem
-	- Floyd's algorithm
-	- Dynamic programming in sequence problems
-	- Chainied matrix multiplication problem using dynamic programming 
-	- Justified text problem
+  -  Full backpack problem
+  -  Floyd's algorithm
+  -  Dynamic programming in sequence problems
+  -  Chainied matrix multiplication problem using dynamic programming
+  -  Justified text problem
 
 <a name="theme-8"></a>
 ### 8: Brach and bound (_TODO, todavía no hemos llegado_)
