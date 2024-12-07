@@ -4,6 +4,7 @@
  * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
  * TAIS009 Alex Guillermo Bonilla Taco
  * TAIS069 Santiago Ochoa de Zabalegui Velasco
+ * 
  *@ </authors> */
 
 #include <iostream>
@@ -15,19 +16,24 @@ using namespace std;
 #include "Matriz.h"
 
 /*@ <answer>
- 
- El problema se resuelve con programacion dinamica de forma recursiva, N es el numero de caracteres de la palabra 1 y M es el numero de
- caracteres de la palabra 2.
- Siendo i el indice de la palabra 1 y j el indice de la palabra 2.
+ El problema se resuelve con programación dinámica. Se trata de un problema similar al de la mochila, en el que se tiene que tiene que
+ maximizar la duracion de los eventos en una sala con un tiempo de duracion total / 2, ya que cuanto mas cerca esten los eventos de la
+ mitad del tiempo total, menor sera la diferencia entre la duracion de los eventos en cada aula.
+ Siendo i el numero de eventos y j el tiempo total.
+
  *Definicion
- Adn(i,j) = cantidad maxima que se consigue al insertar o no insertar caracteres para comparar cada letra de la palabra 1 con la palabra 2
- y obtener una puntuacion respecto a la matriz de puntuaciones.
+ Even(i,j) = Maximo tiempo de duracion de los eventos en una sala con un tiempo total de j e i eventos.
  
  *Caso base
- Adn(i,j)=0 si i = 0 y j = 0
+ Even(0,j) = 0
+ Even(i,0) = 0
+
  *Caso recursivo
- Adn(i,j) = max(Adn(i - 1, j) + punt[i][4], Adn(i,j - 1) + punt[i][4], Adn(i - 1, j - 1) + punt[i][j])
+ Even(i,j) = Max(Even(i-1,j), Even(i-1,j - v[i]) + v[i]) si j >= v[i] -> Se puede coger el evento i
+ Even(i,j) = Even(i-1,j) si j < v[i] -> No se puede coger el evento i
  
+ La llamada inicial es Even(n, total / 2) siendo n el numero de eventos y total el tiempo total de duracion de los eventos.
+
  @ </answer> */
 
 // ================================================================
@@ -36,15 +42,17 @@ using namespace std;
 
 int eventos(int n, int total, vector<int> &v) {
   
-  vector<int> sol(total / 2 + 1, 0);
+  int m = total / 2;
+  
+  vector<int> sol(m + 1, 0);
   
   for (int i = 0; i < n; i++) {
-    for (int j = total / 2; j > 0; j--) {
+    for (int j = m; j > 0; j--) {
       if (j >= v[i]) sol[j] = max(sol[j], sol[j - v[i]] + v[i]);
     }
   }
-
-  return total - sol[total / 2];
+  
+  return total - sol[m];
 }
 
 //@ <answer>
