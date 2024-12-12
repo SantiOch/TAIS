@@ -72,20 +72,18 @@ The `.txt` file contains the test cases for each problem; normally, these are th
   -  Justified text problem
 
 <a name="theme-8"></a>
-### 8: Brach and bound (_TODO, todavía no hemos llegado_)
-  - TODO
-  - TODO
-  - TODO
+### 8: Brach and bound (_D on the judge_)
+  - Branch and bound and when to do it, knowing if it is optimal or not
 
 <a name="theme-9"></a>  
-### 9: Game trees (_TODO, todavía no hemos llegado_)
-  - TODO
+### 9: Game trees (_None on the judge_)
+  - Definition
 
 <a name="theme-10"></a>
-### 10. Computational complexity (_TODO, todavía no hemos llegado_)
-  - TODO
-  - TODO
-  - TODO
+### 10. Computational complexity (_All of the exercies_)
+  - Space complexity
+  - Time complexity
+  - Amortized cost
 
 ## Online judge number information:
 
@@ -102,7 +100,9 @@ The `.txt` file contains the test cases for each problem; normally, these are th
 |   9    |    [6](#theme-6)                       |        5 [(See)](/Ejercicios%20Juez/Week%209)       |   LAB    |     Greedy algorithms over minimization and maximization problems     |
 |   A    |    [7](#theme-7)                       |        5 [(See)](/Ejercicios%20Juez/Week%2010)      |   LAB    |     Dynamic programming                                               |
 |   B    |    [7](#theme-7)                       |        5 [(See)](/Ejercicios%20Juez/Week%2011)      |   LAB    |     Dynamic programming                                               |
-|   C    |    [7](#theme-7)                       |        5 [(See)](/Ejercicios%20Juez/Week%2012)      |   LAB    |     Dynamic programming                                               |
+|   C    |    [7](#theme-7)                       |        5 [(See)](/Ejercicios%20Juez/Week%2012)      |   EXAM   |     Dynamic programming                                               |
+|   D    |    [8](#theme-8)                       |        3 [(See)](/Ejercicios%20Juez/Week%2013)      |   LAB    |     Branch and bound                                                  |
+|   R    |    [ALL](#theme-1)                     |        15 [(See)](/Ejercicios%20Juez/Review)        |   LAB    |     Review for all themes and types of exercises                      |
 
 
 ## License
