@@ -18,7 +18,7 @@ using namespace std;
  @ </answer> */
 
 // ================================================================
-// CÛdigo de la soluciÛn
+// Código de la solución
 // ================================================================
 //@ <answer>
 
@@ -27,6 +27,12 @@ struct Chorizo {
   int gramosNecesarios;
   int masaNecesaria;
   int precio;
+
+  Chorizo(int gramosDisponibles, int gramosNecesarios, int masaNecesaria, int precio) :
+    gramosDisponibles(gramosDisponibles), 
+    gramosNecesarios(gramosNecesarios),
+    masaNecesaria(masaNecesaria),
+    precio(precio) { }
 };
 
 int beneficioVentaChorizosMatriz(const vector<Chorizo>& chorizos, int G, int N) {
