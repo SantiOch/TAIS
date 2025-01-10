@@ -11,9 +11,15 @@
 #include <limits>
 using namespace std;
 
+#ifndef DOMJUDGE
  #include "DigrafoValorado.h"  // descomentar para local
  #include "IndexPQ.h"  // descomentar para local
+#endif
+#ifdef DOMJUDGE
+#include "DigrafoValorado.h" // descomentar para juez
+#include "IndexPQ.h"  // descomentar para local
 
+#endif
 /*@ <answer>
 
  Escribe aquí un comentario general sobre la solución, explicando cómo
