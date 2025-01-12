@@ -43,10 +43,9 @@ int beneficioVentaChorizosMatriz(const vector<Chorizo>& chorizos, int G, int N) 
     for (int j = 1; j <= G; j++) {
       
       Chorizo chorizo = chorizos[i - 1];
-//      chorizos_masa[i][j] = chorizos_masa[i - 1][j];
       
       int maximoChorizos = chorizo.gramosDisponibles / chorizo.gramosNecesarios;
-     
+      
       for (int k = 1; k <= maximoChorizos; k++) {
         
         int masaNecesariaTotal = k * chorizo.masaNecesaria;
