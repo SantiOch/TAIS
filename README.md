@@ -9,6 +9,9 @@
 This repository was created for our subject **Software Engineering Algorithmic Techniques** in Complutense University of Madrid. 
 These were the problems we had to solve on the online judge, lab sessions, and exams. [^1]
 
+> [!NOTE]
+> This is a cloned repository, because I wanted to have it on my profile, if you want to see the original, check [Alex's github profile](https://github.com/AlexBoni97)
+
 There are `12` different themes we learned in this subject, and they are organized by the number on the judge following this pattern:
 
 **There are 2 numbers on each problem:**
