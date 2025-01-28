@@ -107,6 +107,6 @@ The `.txt` file contains the test cases for each problem; normally, these are th
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 [^1]: Footnote (ns q poner aquí pero igual si le pregutamos al profe si podemos subir este repositorio pues podemos poner que le preguntamos y nos dijo que por él no hay problema.
