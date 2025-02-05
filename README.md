@@ -92,15 +92,15 @@ The `.txt` file contains the test cases for each problem; normally, these are th
 
 | Number |                Section                 |                   Total exercises                   | Lab/Exam |                                Content                                |
 | :----- | :------------------------------------- | :-------------------------------------------------- | :------- | :-------------------------------------------------------------------- |
-|   1    |    [1](#theme-1)                       |        2 [ (See)](/Ejercicios%20Juez/Week%201)       |   N/A    |     AVL trees                                                         |
-|   2    |    [2](#theme-2)                       |        6 [ (See)](/Ejercicios%20Juez/Week%202)       |   LAB    |     Priority queues                                                   |
-|   3    |    [2](#theme-2)                       |        4 [ (See)](/Ejercicios%20Juez/Week%203)       |   LAB    |     Indexed priority queues                                           |
-|   4    |    [3](#theme-3)                       |        7 [ (See)](/Ejercicios%20Juez/Week%204)       |   LAB    |     Graphs                                                            |
-|   5    |    [3](#theme-3)                       |        5 [ (See)](/Ejercicios%20Juez/Week%205)       |   LAB    |     Directed graphs                                                   |
-|   6    |    [3](#theme-3), [4](#theme-4)        |        5 [ (See)](/Ejercicios%20Juez/Week%206)       |   EXAM   |     Weighted graphs, disjoint sets, and Kruskal                       |
-|   7    |    [3](#theme-3)                       |        6 [ (See)](/Ejercicios%20Juez/Week%207)       |   LAB    |     Weighted directed graphs and Dijkstra                             |
-|   8    |    [6](#theme-6)                       |        5 [ (See)](/Ejercicios%20Juez/Week%208)       |   LAB    |     Greedy algorithms                                                 |
-|   9    |    [6](#theme-6)                       |        5 [ (See)](/Ejercicios%20Juez/Week%209)       |   LAB    |     Greedy algorithms over minimization and maximization problems     |
+|   1    |    [1](#theme-1)                       |        2 [ (See)](/Ejercicios%20Juez/Week%2001)       |   N/A    |     AVL trees                                                         |
+|   2    |    [2](#theme-2)                       |        6 [ (See)](/Ejercicios%20Juez/Week%2002)       |   LAB    |     Priority queues                                                   |
+|   3    |    [2](#theme-2)                       |        4 [ (See)](/Ejercicios%20Juez/Week%2003)       |   LAB    |     Indexed priority queues                                           |
+|   4    |    [3](#theme-3)                       |        7 [ (See)](/Ejercicios%20Juez/Week%2004)       |   LAB    |     Graphs                                                            |
+|   5    |    [3](#theme-3)                       |        5 [ (See)](/Ejercicios%20Juez/Week%2005)       |   LAB    |     Directed graphs                                                   |
+|   6    |    [3](#theme-3), [4](#theme-4)        |        5 [ (See)](/Ejercicios%20Juez/Week%2006)       |   EXAM   |     Weighted graphs, disjoint sets, and Kruskal                       |
+|   7    |    [3](#theme-3)                       |        6 [ (See)](/Ejercicios%20Juez/Week%2007)       |   LAB    |     Weighted directed graphs and Dijkstra                             |
+|   8    |    [6](#theme-6)                       |        5 [ (See)](/Ejercicios%20Juez/Week%2008)       |   LAB    |     Greedy algorithms                                                 |
+|   9    |    [6](#theme-6)                       |        5 [ (See)](/Ejercicios%20Juez/Week%2009)       |   LAB    |     Greedy algorithms over minimization and maximization problems     |
 |   A    |    [7](#theme-7)                       |        5 [ (See)](/Ejercicios%20Juez/Week%2010)      |   LAB    |     Dynamic programming                                               |
 |   B    |    [7](#theme-7)                       |        5 [ (See)](/Ejercicios%20Juez/Week%2011)      |   LAB    |     Dynamic programming                                               |
 |   C    |    [7](#theme-7)                       |        5 [ (See)](/Ejercicios%20Juez/Week%2012)      |   EXAM   |     Dynamic programming                                               |
